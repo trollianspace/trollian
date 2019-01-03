@@ -3,6 +3,7 @@
 module SettingsHelper
   HUMAN_LOCALES = {
     en: 'English',
+    'en-MD': 'Mastodon Default',
     ar: 'العربية',
     ast: 'l\'asturianu',
     bg: 'Български',
