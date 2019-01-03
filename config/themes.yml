@@ -1,3 +1,7 @@
-default: styles/application.scss
+default: styles/Trollian.scss
+homestuck: styles/Homestuck.scss
+NewAlternian: styles/NewAlternian.scss
+OldAlternian: styles/OldAlternian.scss
 contrast: styles/contrast.scss
 mastodon-light: styles/mastodon-light.scss
+test: styles/Test.scss
