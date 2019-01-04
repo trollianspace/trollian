@@ -13,7 +13,11 @@
   "account.followers.empty": "This Player Has No Clients",
   "account.follows": "Server Players",
   "account.follows.empty": "This Player Has No Servers.",
+<<<<<<< HEAD
   "account.follows_you": "Server Player",
+=======
+  "account.follows_you": "Client Player",
+>>>>>>> 677e558ea53df48577cbdbb71246942e4a450e36
   "account.hide_reblogs": "Hide bubbles from @{name}",
   "account.link_verified_on": "Ownership of this link was checked on {date}",
   "account.media": "Media",
@@ -50,10 +54,17 @@
   "column.domain_blocks": "Culled Timelines",
   "column.favourites": "Sylladex",
   "column.follow_requests": "Connection Requests",
+<<<<<<< HEAD
   "column.home": "Chumlog",
   "column.lists": "Chumroll",
   "column.mutes": "Muted Players",
   "column.notifications": "Pesterlog",
+=======
+  "column.home": "Chum List",
+  "column.lists": "Chumroll",
+  "column.mutes": "Muted Players",
+  "column.notifications": "Sylladex",
+>>>>>>> 677e558ea53df48577cbdbb71246942e4a450e36
   "column.pins": "Pinned posts",
   "column.public": "Doomed Timelines",
   "column_back_button.label": "Abscond",
@@ -192,7 +203,11 @@
   "mute_modal.hide_notifications": "Hide pesters from this user?",
   "navigation_bar.apps": "Mobile apps",
   "navigation_bar.blocks": "Culled players",
+<<<<<<< HEAD
   "navigation_bar.community_timeline": "Trollian",
+=======
+  "navigation_bar.community_timeline": "Chumlog",
+>>>>>>> 677e558ea53df48577cbdbb71246942e4a450e36
   "navigation_bar.compose": "Compose new post",
   "navigation_bar.direct": "Memos",
   "navigation_bar.discover": "Discover",

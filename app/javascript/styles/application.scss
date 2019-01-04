@@ -26,3 +26,8 @@
 @import 'mastodon/dashboard';
 @import 'mastodon/rtl';
 @import 'mastodon/accessibility';
+
+// Columns width
+div.column {
+  flex-grow: 1;
+}

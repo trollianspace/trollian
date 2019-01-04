@@ -1,7 +1,15 @@
 default: styles/Trollian.scss
+<<<<<<< HEAD
 Homestuck: styles/Homestuck.scss
+=======
+homestuck: styles/Homestuck.scss
+>>>>>>> 677e558ea53df48577cbdbb71246942e4a450e36
 NewAlternian: styles/NewAlternian.scss
 OldAlternian: styles/OldAlternian.scss
 contrast: styles/contrast.scss
 mastodon-light: styles/mastodon-light.scss
+<<<<<<< HEAD
 Test: styles/Test.scss
+=======
+test: styles/Test.scss
+>>>>>>> 677e558ea53df48577cbdbb71246942e4a450e36

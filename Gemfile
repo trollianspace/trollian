@@ -91,7 +91,7 @@ gem 'webpush'
 gem 'ruby-bbcode'
 
 gem 'json-ld', '~> 2.2'
-gem 'json-ld-preloaded', '~> 3.0'
+gem 'json-ld-preloaded', '~> 2.2'
 gem 'rdf-normalize', '~> 0.3'
 
 group :development, :test do
@@ -146,3 +146,5 @@ group :production do
   gem 'lograge', '~> 0.10'
   gem 'redis-rails', '~> 5.0'
 end
+
+gem "ruby-bbcode", "~> 2.0"
