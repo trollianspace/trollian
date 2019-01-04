@@ -43,6 +43,8 @@
 #  featured_collection_url :string
 #  fields                  :jsonb
 #  actor_type              :string
+#  quirk                   :text
+#  regex                   :text
 #  discoverable            :boolean
 #  also_known_as           :string           is an Array
 #

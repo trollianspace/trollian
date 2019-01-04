@@ -26,8 +26,10 @@ class PostStatusService < BaseService
     visibility = options[:visibility] || account.user&.setting_default_privacy
     visibility = :unlisted if visibility == :public && account.silenced
 
+    quirkified_text = quirkify_text(account, text)
+
     ApplicationRecord.transaction do
-      status = account.statuses.create!(text: text,
+      status = account.statuses.create!(text: quirkified_text,
                                         media_attachments: media || [],
                                         thread: in_reply_to,
                                         sensitive: (options[:sensitive].nil? ? account.user&.setting_default_sensitive : options[:sensitive]) || options[:spoiler_text].present?,
@@ -89,5 +91,37 @@ class PostStatusService < BaseService
     ActivityTracker.increment('activity:interactions')
     return if account.following?(status.in_reply_to_account_id)
     PotentialFriendshipTracker.record(account.id, status.in_reply_to_account_id, :reply)
+  end
+
+  def safe_hold(text, list)
+    output = text
+    list.each do |term|
+      output = output.sub(term,"۝")
+    end
+    return output
+  end
+
+  def safe_return(text, list)
+    output = text
+    list.each do |term|
+      output = output.sub("۝",term)
+    end
+    return output
+  end
+
+  def quirkify_text(account, text)
+    result = text
+    quirks = account.quirk.split(',')
+    regexes = account.regex.split(',')
+
+    if quirks.length == regexes.length
+      regexes.length.times do |i|
+      exceptions = result.scan(/(?::\w+:|@\S+|https?:\/\/\S+|\[[^\]]+\])/)
+      result = safe_hold(result, exceptions)
+      result = result.gsub(Regexp.new(regexes[i]), quirks[i])
+      result = safe_return(result, exceptions)
+      end
+    end
+    return result
   end
 end

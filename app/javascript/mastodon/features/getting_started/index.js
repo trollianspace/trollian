@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Column from '../ui/components/column';
 import ColumnLink from '../ui/components/column_link';
@@ -32,6 +33,8 @@ const messages = defineMessages({
   personal: { id: 'navigation_bar.personal', defaultMessage: 'Personal' },
   security: { id: 'navigation_bar.security', defaultMessage: 'Security' },
   menu: { id: 'getting_started.heading', defaultMessage: 'Getting started' },
+  rules: { id: 'getting_started.rules', defaultMessage: 'Rules' },
+  quirk: { id: 'getting_started.quirk', defaultMessage: 'Quirk Guide' },
 });
 
 const mapStateToProps = state => ({
@@ -87,10 +90,12 @@ class GettingStarted extends ImmutablePureComponent {
         <ColumnSubheading key={i++} text={intl.formatMessage(messages.discover)} />,
         <ColumnLink key={i++} icon='users' text={intl.formatMessage(messages.community_timeline)} to='/timelines/public/local' />,
         <ColumnLink key={i++} icon='globe' text={intl.formatMessage(messages.public_timeline)} to='/timelines/public' />,
+        <ColumnLink key={i++} icon='book' text={intl.formatMessage(messages.rules)} href='/about/more' />,
+        <ColumnLink key={i++} icon='book' text={intl.formatMessage(messages.quirk)} href='https://plushrump.neocities.org/quirks.html' />,
         <ColumnSubheading key={i++} text={intl.formatMessage(messages.personal)} />
       );
 
-      height += 34*2 + 48*2;
+      height += 34*4 + 48*4;
     }
 
     navItems.push(
