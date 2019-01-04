@@ -147,4 +147,3 @@ group :production do
   gem 'redis-rails', '~> 5.0'
 end
 
-gem "ruby-bbcode", "~> 2.0"

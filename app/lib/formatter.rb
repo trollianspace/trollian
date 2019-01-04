@@ -24,11 +24,7 @@ class Formatter
     unless status.local?
       html = reformat(raw_content)
       html = encode_custom_emojis(html, status.emojis, options[:autoplay]) if options[:custom_emojify]
-<<<<<<< HEAD
       html = format_bbcode(html)
-=======
-      html = format_bbcode(html)      
->>>>>>> 677e558ea53df48577cbdbb71246942e4a450e36
       return html.html_safe # rubocop:disable Rails/OutputSafety
     end
 

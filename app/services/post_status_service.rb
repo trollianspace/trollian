@@ -27,8 +27,6 @@ class PostStatusService < BaseService
     visibility = :unlisted if visibility == :public && account.silenced
     quirkified_text = quirkify_text(account, text)
 
-    quirkified_text = quirkify_text(account, text)
-
     ApplicationRecord.transaction do
       status = account.statuses.create!(text: quirkified_text,
                                         media_attachments: media || [],
@@ -93,11 +91,7 @@ class PostStatusService < BaseService
     return if account.following?(status.in_reply_to_account_id)
     PotentialFriendshipTracker.record(account.id, status.in_reply_to_account_id, :reply)
   end
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> 677e558ea53df48577cbdbb71246942e4a450e36
   def safe_hold(text, list)
     output = text
     list.each do |term|
