@@ -37,7 +37,7 @@ class Status < ApplicationRecord
 
   update_index('statuses#status', :proper) if Chewy.enabled?
 
-  enum visibility: [:public, :unlisted, :private, :direct, :limited], _suffix: :visibility
+  enum visibility: [:public, :unlisted, :private, :direct, :local, :limited], _suffix: :visibility
 
   belongs_to :application, class_name: 'Doorkeeper::Application', optional: true
 
@@ -77,6 +77,7 @@ class Status < ApplicationRecord
   scope :without_replies, -> { where('statuses.reply = FALSE OR statuses.in_reply_to_account_id = statuses.account_id') }
   scope :without_reblogs, -> { where('statuses.reblog_of_id IS NULL') }
   scope :with_public_visibility, -> { where(visibility: :public) }
+  scope :with_local_visibility, -> { where(visibility: :local).or(where(visibility: :public)) }
   scope :tagged_with, ->(tag) { joins(:statuses_tags).where(statuses_tags: { tag_id: tag }) }
   scope :excluding_silenced_accounts, -> { left_outer_joins(:account).where(accounts: { silenced: false }) }
   scope :including_silenced_accounts, -> { left_outer_joins(:account).where(accounts: { silenced: true }) }
@@ -382,9 +383,15 @@ class Status < ApplicationRecord
 
     def timeline_scope(local_only = false)
       starting_scope = local_only ? Status.local : Status
-      starting_scope
-        .with_public_visibility
-        .without_reblogs
+      if local_only
+        starting_scope
+          .with_local_visibility
+          .without_reblogs
+      else
+        starting_scope
+          .with_public_visibility
+          .without_reblogs
+      end
     end
 
     def apply_timeline_filters(query, account, local_only)
