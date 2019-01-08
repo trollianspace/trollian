@@ -29,7 +29,7 @@ class OStatus::Activity::Creation < OStatus::Activity::Base
     status = nil
 
     # Skip if the reblogged status is not public
-    return if cached_reblog && !(cached_reblog.public_visibility? || cached_reblog.unlisted_visibility?)
+    return if cached_reblog && !(cached_reblog.public_visibility? || cached_reblog.unlisted_visibility? || cached_reblog.local_visibility?)
 
     media_attachments = save_media.take(4)
 

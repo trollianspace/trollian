@@ -171,7 +171,7 @@ class StatusesController < ApplicationController
   end
 
   def set_referrer_policy_header
-    return if @status.public_visibility? || @status.unlisted_visibility?
+    return if @status.public_visibility? || @status.unlisted_visibility? || @status.local_visibility?
     response.headers['Referrer-Policy'] = 'origin'
   end
 end

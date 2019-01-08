@@ -56,7 +56,7 @@ class ActivityPub::TagManager
     case status.visibility
     when 'public'
       [COLLECTIONS[:public]]
-    when 'unlisted', 'private'
+    when 'unlisted', 'private', 'local'
       [account_followers_url(status.account)]
     when 'direct', 'limited'
       status.active_mentions.map { |mention| uri_for(mention.account) }
@@ -78,6 +78,9 @@ class ActivityPub::TagManager
       cc << account_followers_url(status.account)
     when 'unlisted'
       cc << COLLECTIONS[:public]
+    when 'local'
+      cc << COLLECTIONS[:public]
+
     end
 
     cc.concat(status.active_mentions.map { |mention| uri_for(mention.account) }) unless status.direct_visibility? || status.limited_visibility?

@@ -144,13 +144,12 @@ class StatusActionBar extends ImmutablePureComponent {
 
     const mutingConversation = status.get('muted');
     const anonymousAccess    = !me;
-    const publicStatus       = ['public', 'unlisted'].includes(status.get('visibility'));
+    const publicStatus       = ['public', 'unlisted', 'local'].includes(status.get('visibility'));
 
     let menu = [];
     let reblogIcon = 'retweet';
     let replyIcon;
     let replyTitle;
-    let replyIcon;
 
     menu.push({ text: intl.formatMessage(messages.open), action: this.handleOpen });
 
@@ -189,6 +188,8 @@ class StatusActionBar extends ImmutablePureComponent {
       reblogIcon = 'envelope';
     } else if (status.get('visibility') === 'private') {
       reblogIcon = 'lock';
+    } else if (status.get('visibility') === 'local') {
+      reblogIcon = 'users';
     }
 
     if (status.get('in_reply_to_id', null) === null) {

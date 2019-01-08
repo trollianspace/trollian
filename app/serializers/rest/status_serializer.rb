@@ -97,7 +97,7 @@ class REST::StatusSerializer < ActiveModel::Serializer
     current_user? &&
       current_user.account_id == object.account_id &&
       !object.reblog? &&
-      %w(public unlisted).include?(object.visibility)
+      %w(public unlisted local).include?(object.visibility)
   end
 
   def ordered_mentions

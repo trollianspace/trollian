@@ -27,6 +27,6 @@ class ActivityPub::Activity::Announce < ActivityPub::Activity
   private
 
   def announceable?(status)
-    status.account_id == @account.id || status.public_visibility? || status.unlisted_visibility?
+    status.account_id == @account.id || status.public_visibility? || status.unlisted_visibility? || status.local_visibility?
   end
 end
