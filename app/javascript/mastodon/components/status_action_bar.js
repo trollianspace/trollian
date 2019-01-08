@@ -149,6 +149,7 @@ class StatusActionBar extends ImmutablePureComponent {
     let menu = [];
     let reblogIcon = 'retweet';
     let replyTitle;
+    let replyIcon;
 
     menu.push({ text: intl.formatMessage(messages.open), action: this.handleOpen });
 
@@ -190,8 +191,10 @@ class StatusActionBar extends ImmutablePureComponent {
     }
 
     if (status.get('in_reply_to_id', null) === null) {
+      replyIcon = 'reply';
       replyTitle = intl.formatMessage(messages.reply);
     } else {
+      replyIcon = 'reply-all';
       replyTitle = intl.formatMessage(messages.replyAll);
     }
 
