@@ -79,8 +79,8 @@ class Account < ApplicationRecord
   validates_with UniqueUsernameValidator, if: -> { local? && will_save_change_to_username? }
   validates_with UnreservedUsernameValidator, if: -> { local? && will_save_change_to_username? }
   validates :display_name, length: { maximum: 30 }, if: -> { local? && will_save_change_to_display_name? }
-  validates :note, length: { maximum: 413 }, if: -> { local? && will_save_change_to_note? }
-  validate :note_has_fifteen_newlines?, if: -> { local? && will_save_change_to_note? }
+  validates :note, length: { maximum: 2000 }, if: -> { local? && will_save_change_to_note? }
+  validate :note_has_twenty_newlines?, if: -> { local? && will_save_change_to_note? }
   validates :fields, length: { maximum: 4 }, if: -> { local? && will_save_change_to_fields? }
 
   scope :remote, -> { where.not(domain: nil) }
@@ -324,8 +324,8 @@ class Account < ApplicationRecord
     shared_inbox_url.presence || inbox_url
   end
 
-  def note_has_fifteen_newlines?
-    errors.add(:note, 'Bio can\'t have more then 15 newlines') unless note.count("\n") <= 15
+  def note_has_twenty_newlines?
+    errors.add(:note, 'Bio can\'t have more then 20 newlines') unless note.count("\n") <= 20
   end
 
   class Field < ActiveModelSerializers::Model

@@ -1,5 +1,7 @@
-default: styles/Trollian.scss
-Homestuck: styles/Homestuck.scss
+default: styles/Homestuck.scss
+OriginalTrollian: styles/OriginalTrollian.scss
+Trollian: styles/Trollian.scss
+Pesterchum: styles/Pesterchum.scss
 NewAlternian: styles/NewAlternian.scss
 OldAlternian: styles/OldAlternian.scss
 contrast: styles/contrast.scss
