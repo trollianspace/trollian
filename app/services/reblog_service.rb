@@ -10,7 +10,6 @@ class ReblogService < BaseService
   # @return [Status]
   def call(account, reblogged_status)
     reblogged_status = reblogged_status.reblog if reblogged_status.reblog?
-    return if reblogged_status.local_visibility?
 
     authorize_with account, reblogged_status, :reblog?
 
@@ -21,11 +20,8 @@ class ReblogService < BaseService
     reblog = account.statuses.create!(reblog: reblogged_status, text: '')
 
     DistributionWorker.perform_async(reblog.id)
-
-    unless reblogged_status.local_visibility?
-      Pubsubhubbub::DistributionWorker.perform_async(reblog.stream_entry.id)
-      ActivityPub::DistributionWorker.perform_async(reblog.id)
-    end
+    Pubsubhubbub::DistributionWorker.perform_async(reblog.stream_entry.id)
+    ActivityPub::DistributionWorker.perform_async(reblog.id)
 
     create_notification(reblog)
     bump_potential_friendship(account, reblog)

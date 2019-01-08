@@ -161,9 +161,8 @@ class ActionBar extends React.PureComponent {
     let reblogIcon = 'retweet';
     if (status.get('visibility') === 'direct') reblogIcon = 'envelope';
     else if (status.get('visibility') === 'private') reblogIcon = 'lock';
-    else if (status.get('visibility') === 'local') reblogIcon = 'users';
 
-    let reblog_disabled = (status.get('visibility') === 'direct' || status.get('visibility') === 'private' || status.get('visibility') === 'local');
+    let reblog_disabled = (status.get('visibility') === 'direct' || status.get('visibility') === 'private');
 
     return (
       <div className='detailed-status__action-bar'>
