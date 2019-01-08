@@ -1,4 +1,4 @@
-![Mastodon](https://i.imgur.com/NhZc40l.png)
+![Mastodon](https://media.discordapp.net/attachments/524354033989845013/525131729946542100/ts_logo.png)
 ========
 
 [![GitHub release](https://img.shields.io/github/release/tootsuite/mastodon.svg)][releases]
