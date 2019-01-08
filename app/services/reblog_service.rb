@@ -27,7 +27,6 @@ class ReblogService < BaseService
       ActivityPub::DistributionWorker.perform_async(reblog.id)
     end
 
-
     create_notification(reblog)
     bump_potential_friendship(account, reblog)
 
