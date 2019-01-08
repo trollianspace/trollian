@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+ # frozen_string_literal: true
 
 require 'singleton'
 require_relative './sanitize_config'
@@ -57,6 +57,7 @@ class Formatter
   def simplified_format(account, **options)
     html = account.local? ? linkify(account.note) : reformat(account.note)
     html = encode_custom_emojis(html, account.emojis, options[:autoplay]) if options[:custom_emojify]
+
     html.html_safe # rubocop:disable Rails/OutputSafety
   end
 
@@ -253,6 +254,7 @@ class Formatter
   def mention_html(account)
     "<span class=\"h-card\"><a href=\"#{encode(TagManager.instance.url_for(account))}\" class=\"u-url mention\">@<span>#{encode(account.username)}</span></a></span>"
   end
+ 
   def format_bbcode(html)
     begin
       html = html.bbcode_to_html(false, {
@@ -333,95 +335,17 @@ class Formatter
           :html_open => '<span class="bbcode__s">', :html_close => '</span>',
           :description => 'line through',
           :example => 'This is [s]line through[/s].'},
-      }, :enable, :i, :b, :color, :quote, :code, :size, :u, :s, :spin, :pulse, :flip, :large, :colorhex, :faicon)
+        :center => {
+          :html_open => '<div style="text-align:center;">', :html_close => '</div>',
+          :description => 'Center a text',
+          :example => '[center]This is centered[/center].'},
+        :right => {
+          :html_open => '<div style="text-align:right;">', :html_close => '</div>',
+          :description => 'Right Align a text',
+          :example => '[right]This is centered[/right].'},
+      }, :enable, :i, :b, :color, :quote, :code, :size, :u, :s, :spin, :pulse, :flip, :large, :colorhex, :faicon, :center, :right)
     rescue Exception => e
     end
     html
   end
 end
-
-def format_bbcode(html)
-    begin
-      html = html.bbcode_to_html(false, {
-        :spin => {
-          :html_open => '<span class="bbcode__spin">', :html_close => '</span>',
-          :description => 'Make text spin',
-          :example => 'This is [spin]spin[/spin].'},
-        :pulse => {
-          :html_open => '<span class="bbcode__pulse">', :html_close => '</span>',
-          :description => 'Make text pulse',
-          :example => 'This is [pulse]pulse[/pulse].'},
-        :b => {
-          :html_open => '<span class="bbcode__b">', :html_close => '</span>',
-          :description => 'Make text bold',
-          :example => 'This is [b]bold[/b].'},
-        :i => {
-          :html_open => '<span class="bbcode__i">', :html_close => '</span>',
-          :description => 'Make text italic',
-          :example => 'This is [i]italic[/i].'},
-        :flip => {
-          :html_open => '<span class="bbcode__flip-%direction%">', :html_close => '</span>',
-          :description => 'Flip text',
-          :example => '[flip=horizontal]This is flip[/flip]',
-          :allow_quick_param => true, :allow_between_as_param => false,
-          :quick_param_format => /(horizontal|vertical)/,
-          :quick_param_format_description => 'The size parameter \'%param%\' is incorrect, a number is expected',
-          :param_tokens => [{:token => :direction}]},
-        :large => {
-          :html_open => '<span class="bbcode__large-%size%">', :html_close => '</span>',
-          :description => 'Large text',
-          :example => '[large=2x]Large text[/large]',
-          :allow_quick_param => true, :allow_between_as_param => false,
-          :quick_param_format => /(2x|3x|4x|5x)/,
-          :quick_param_format_description => 'The size parameter \'%param%\' is incorrect, a number is expected',
-          :param_tokens => [{:token => :size}]},
-        :size => {
-          :html_open => '<span class="bbcode__size" data-bbcodesize="%size%px">', :html_close => '</span>',
-          :description => 'Change the size of the text',
-          :example => '[size=32]This is 32px[/size]',
-          :allow_quick_param => true, :allow_between_as_param => false,
-          :quick_param_format => /(\d+)/,
-          :quick_param_format_description => 'The size parameter \'%param%\' is incorrect, a number is expected',
-          :param_tokens => [{:token => :size}]},
-        :color => {
-          :html_open => '<span class="bbcode__color" data-bbcodecolor="%color%">', :html_close => '</span>',
-          :description => 'Use color',
-          :example => '[color=red]This is red[/color]',
-          :allow_quick_param => true, :allow_between_as_param => false,
-          :quick_param_format => /([a-z]+)/i,
-          :param_tokens => [{:token => :color}]},
-        :colorhex => {
-          :html_open => '<span class="bbcode__color" data-bbcodecolor="#%colorcode%">', :html_close => '</span>',
-          :description => 'Use color code',
-          :example => '[colorhex=ffffff]White text[/colorhex]',
-          :allow_quick_param => true, :allow_between_as_param => false,
-          :quick_param_format => /([0-9a-fA-F]{6})/,
-          :quick_param_format_description => 'The size parameter \'%param%\' is incorrect',
-          :param_tokens => [{:token => :colorcode}]},
-        :faicon => {
-          :html_open => '<span class="fa fa-%between% bbcode__faicon" style="display: none"></span><span class="faicon_FTL">%between%</span>', :html_close => '',
-          :description => 'Use Font Awesome Icons',
-          :example => '[faicon]users[/faicon]',
-          :only_allow => [],
-          :require_between => true},
-        :quote => {
-          :html_open => '<div class="bbcode__quote">', :html_close => '</div>',
-          :description => 'Quote',
-          :example => 'This is [quote]quote[/quote].'},
-        :code => {
-          :html_open => '<div class="bbcode__code">', :html_close => '</div>',
-          :description => 'Code',
-          :example => 'This is [code]Code[/code].'},
-        :u => {
-          :html_open => '<span class="bbcode__u">', :html_close => '</span>',
-          :description => 'Under line',
-          :example => 'This is [u]Under line[/u].'},
-        :s => {
-          :html_open => '<span class="bbcode__s">', :html_close => '</span>',
-          :description => 'line through',
-          :example => 'This is [s]line through[/s].'},
-      }, :enable, :i, :b, :color, :quote, :code, :size, :u, :s, :spin, :pulse, :flip, :large, :colorhex, :faicon)
-    rescue Exception => e
-    end
-    html
-  end

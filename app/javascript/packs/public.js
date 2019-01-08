@@ -214,7 +214,7 @@ function main() {
     const bioTextArea = document.querySelector('#account_note');
 
     if (noteCounter) {
-      noteCounter.textContent = 413 - length(bioTextArea.value);
+      noteCounter.textContent = 2000 - length(bioTextArea.value);
     }
 
     if (bioTextArea) {
@@ -222,7 +222,6 @@ function main() {
       bioTextArea.style.height = (bioTextArea.scrollHeight+3) + 'px';
     }
   }
-}
 
   const MAX_QUIRK_LENGTH = 200; // ???
 
@@ -254,6 +253,7 @@ function main() {
       regex.innerHTML = target.value; // probably shouldn't need to emojify this, right?
     }
   });
+}
 
 loadPolyfills().then(main).catch(error => {
   console.error(error);
