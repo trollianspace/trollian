@@ -36,10 +36,21 @@ class Formatter
     html = encode_and_link_urls(html, linkable_accounts)
     html = encode_custom_emojis(html, status.emojis, options[:autoplay]) if options[:custom_emojify]
     html = simple_format(html, {}, sanitize: false)
+    html = fix_newlines(html)
     html = html.delete("\n")
     html = format_bbcode(html)
 
     html.html_safe # rubocop:disable Rails/OutputSafety
+
+    replace = html.gsub(/^(<p>)?([\u{1F300}-\u{1F6FF}])(.*?)((<br>)|(<br><br>)|(<\/p>))?$/) { |match|
+        pclasses[$2] ? "#{$1}<span class='#{pclasses[$2]}'>#{$2}#{$3}</span>#{$4}" : match }
+
+    replace.html_safe
+  end
+
+  def fix_newlines(html)
+    fix = html.gsub(/<\/p>\s*<p>/, "<br><br>\n")
+    fix.gsub(/<br \/>/, "<br>\n")
   end
 
   def reformat(html)
@@ -113,7 +124,11 @@ class Formatter
 
     rewrite(html.dup, entities) do |entity|
       if entity[:url]
-        link_to_url(entity, options)
+        if entity[:indices][0] > 4 && html[entity[:indices][0]-5..entity[:indices][0]-1] == "[url="
+          entity[:url]
+        else
+          link_to_url(entity, options)
+        end
       elsif entity[:hashtag]
         link_to_hashtag(entity)
       elsif entity[:screen_name]
@@ -256,7 +271,16 @@ class Formatter
   end
  
   def format_bbcode(html)
-    begin
+    colorhex = {
+      :html_open => '<span class="bbcode__color" data-bbcodecolor="#%colorcode%">', :html_close => '</span>',
+      :description => 'Use color code',
+      :example => '[colorhex=ffffff]White text[/colorhex]',
+      :allow_quick_param => true, :allow_between_as_param => false,
+      :quick_param_format => /([0-9a-fA-F]{6})/,
+      :quick_param_format_description => 'The size parameter \'%param%\' is incorrect',
+      :param_tokens => [{:token => :colorcode}]}
+
+   begin
       html = html.bbcode_to_html(false, {
         :spin => {
           :html_open => '<span class="bbcode__spin">', :html_close => '</span>',
@@ -305,14 +329,8 @@ class Formatter
           :allow_quick_param => true, :allow_between_as_param => false,
           :quick_param_format => /([a-z]+)/i,
           :param_tokens => [{:token => :color}]},
-        :colorhex => {
-          :html_open => '<span class="bbcode__color" data-bbcodecolor="#%colorcode%">', :html_close => '</span>',
-          :description => 'Use color code',
-          :example => '[colorhex=ffffff]White text[/colorhex]',
-          :allow_quick_param => true, :allow_between_as_param => false,
-          :quick_param_format => /([0-9a-fA-F]{6})/,
-          :quick_param_format_description => 'The size parameter \'%param%\' is incorrect',
-          :param_tokens => [{:token => :colorcode}]},
+        :colorhex => colorhex,
+        :hex => colorhex,
         :faicon => {
           :html_open => '<span class="fa fa-%between% bbcode__faicon" style="display: none"></span><span class="faicon_FTL">%between%</span>', :html_close => '',
           :description => 'Use Font Awesome Icons',
@@ -343,7 +361,36 @@ class Formatter
           :html_open => '<div style="text-align:right;">', :html_close => '</div>',
           :description => 'Right Align a text',
           :example => '[right]This is centered[/right].'},
-      }, :enable, :i, :b, :color, :quote, :code, :size, :u, :s, :spin, :pulse, :flip, :large, :colorhex, :faicon, :center, :right)
+        :url => {
+          :html_open => '<a target="_blank" rel="nofollow noopener" href="%url%">%between%', :html_close => '</a>',
+          :description => 'Link to another page',
+          :example => '[url=http://www.google.com/]link[/url].',
+          :require_between => true,
+          :allow_quick_param => true, :allow_between_as_param => false,
+          :quick_param_format => /^((((http|https|ftp):\/\/)).+)$/,
+          :param_tokens => [{:token => :url}],
+          :quick_param_format_description => 'The URL should start with http:// https://, ftp://'},
+        :caps => {
+          :html_open => '<span class="bbcode__caps">', :html_close => '</span>',
+          :description => 'Uppercase',
+          :example => 'This is [caps]uppercase.[/caps].'},
+        :lower => {
+          :html_open => '<span class="bbcode__lower">', :html_close => '</span>',
+          :description => 'Lowercase',
+          :example => 'This is [lower]Lowercase[/lower].'},
+        :kan => {
+          :html_open => '<span class="bbcode__kan">', :html_close => '</span>',
+          :description => 'capitalize',
+          :example => 'This is [kan]capitalize[/kan].'},
+        :comic => {
+          :html_open => '<span class="bbcode__comic">', :html_close => '</span>',
+          :description => 'Comic Sans',
+          :example => 'This is [comic]Comic Sans[/comic].'},
+        :doc => {
+          :html_open => '<span class="bbcode__doc">', :html_close => '</span>',
+          :description => 'Transparent',
+          :example => 'This is [doc]Transparent Text[/doc].'},
+      }, :enable, :i, :b, :color, :quote, :code, :size, :u, :s, :spin, :pulse, :flip, :large, :colorhex, :faicon, :center, :right, :url, :hex, :caps, :lower, :kan, :comic, :doc)
     rescue Exception => e
     end
     html

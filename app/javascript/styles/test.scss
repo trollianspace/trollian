@@ -1,0 +1,391 @@
+@import "application";
+
+//colors
+$color_cornflower_blue_approx: #5e98e4;
+$color_pirate_gold_approx: #c48a01;
+$color_golden_fizz_approx: rgb(250,255,69);
+$white: white;
+$color_rangoon_green_approx: rgb(30,30,30);
+$blue: blue;
+$color_selective_yellow_approx: #fbb401;
+$black: black;
+$color_log_cabin_approx: #202020;
+$color_boulder_approx: #7a7977;
+$color_cream_can_approx: rgb(238,203,87);
+$color_buttercup_approx: #eead08;
+$red:  red;
+$color_pearl_bush_approx: #e7e1d3;
+$yellow: yellow;
+$gray: grey;
+$color_cape_cod_approx: rgb(64,64,64);
+
+.columns-area {
+	background: $color_cornflower_blue_approx;
+}
+.column {
+	background: $color_pirate_gold_approx;
+	border: 2px solid $color_golden_fizz_approx;
+	padding: 0;
+	margin: 5px 5px 5px 10px;
+	.fa {
+		color: $color_pearl_bush_approx;
+	}
+	> .scrollable {
+		background-color: $color_selective_yellow_approx;
+	}
+}
+.column-header {
+	color: $white;
+	background-color: $color_pirate_gold_approx;
+}
+.column-header__button {
+	color: $white;
+	background-color: $color_pirate_gold_approx;
+}
+p {
+	color: $color_rangoon_green_approx;
+}
+.ellipsis {
+	color: $blue;
+}
+a {
+	&:active {
+		color: $blue;
+	}
+	&:visited a:hover {
+		color: $blue;
+	}
+}
+.column-subheading {
+	background-color: $color_selective_yellow_approx;
+	color: $white;
+}
+.getting-started {
+	background-color: $color_selective_yellow_approx;
+	color: $black;
+	p {
+		color: $black;
+	}
+}
+.column-link {
+	background-color: $black;
+	color: $white;
+	border: 2px solid $white;
+	&:hover {
+		background-color: $color_log_cabin_approx;
+	}
+}
+.getting-started__wrapper {
+	background-color: $color_selective_yellow_approx;
+	color: $black;
+}
+.drawer__tab {
+	background-color: $color_pirate_gold_approx;
+	padding: 5px 0 2px;
+}
+.search__input {
+	background: $black;
+	color: $white;
+}
+.navigation-bar {
+	background: $color_pirate_gold_approx;
+}
+.navigation-bar__profile-edit {
+	color: $color_boulder_approx;
+	span {
+		color: $white;
+	}
+}
+.compose-form {
+	background: $black;
+	.autosuggest-textarea__textarea {
+		color: $white;
+		background-color: $black;
+		padding: 6px;
+		//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+		border-radius: 0;
+	}
+	.compose-form__buttons-wrapper {
+		background: $black;
+		color: $white;
+		//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+		border-radius: 0;
+		.icon-button {
+			color: $white;
+		}
+		.character-counter__wrapper .character-counter {
+			color: $white;
+		}
+	}
+}
+.compose-form__uploads-wrapper {
+	background: $black;
+}
+.display-name__account {
+	color: $color_boulder_approx;
+}
+.notification__message {
+	.fa {
+		color: $blue;
+	}
+	span span {
+		color: $color_boulder_approx;
+	}
+}
+.drawer__inner__mastodon {
+	background-color: $black;
+}
+.drawer {
+	background: $color_golden_fizz_approx;
+}
+.notification__filter-bar {
+	border-bottom: 0 solid $white;
+	button {
+		padding: 3px 0;
+		font-size: 10px;
+		background-color: $color_selective_yellow_approx;
+		&.active {
+			&:after {
+				display: none;
+			}
+			&:before {
+				display: none;
+			}
+		}
+	}
+	span {
+		color: $white;
+	}
+}
+.empty-column-indicator {
+	background-color: $color_selective_yellow_approx;
+	color: $white;
+}
+.account__display-name {
+	.display-name__account {
+		color: $white;
+	}
+	.display-name__html {
+		color: $color_boulder_approx;
+	}
+}
+.column-header__back-button {
+	background-color: $color_pirate_gold_approx;
+	color: $white;
+}
+.column-back-button {
+	background: $color_pirate_gold_approx;
+	color: $white;
+	background: $black;
+}
+.column-back-button--slim-button {
+	background: $color_pirate_gold_approx;
+	color: $white;
+}
+.column-inline-form {
+	background-color: $color_selective_yellow_approx;
+	color: $white;
+	label input {
+		border-bottom: 1px solid $white;
+	}
+}
+.loading-indicator {
+	color: $white;
+}
+.status {
+	border-bottom: 5px solid $color_cream_can_approx;
+	background-color: $white;
+}
+.notification {
+	border-bottom: 5px solid $color_selective_yellow_approx;
+	background-color: $white;
+}
+.account {
+	border: 0 solid $white;
+}
+.load-more {
+	background: $color_selective_yellow_approx;
+	padding: 5px;
+	color: $white;
+	border: 2px solid $color_cream_can_approx;
+	&:hover {
+		color: $white;
+		background-color: $color_buttercup_approx;
+	}
+}
+.account__action-bar__tab {
+	background: $black;
+	color: $white;
+	&.active {
+		border-bottom: 5px solid $red;
+	}
+	> span {
+		color: $white;
+	}
+}
+.account__section-headline {
+	background: $color_pirate_gold_approx;
+	color: $white;
+	a {
+		color: $black;
+		&.active {
+			color: $white;
+			&:after {
+				display: none;
+			}
+			&:before {
+				display: none;
+			}
+		}
+	}
+}
+.status__wrapper-local {
+	.status__prepend {
+		color: $white;
+	}
+	.muted strong {
+		color: $white;
+	}
+}
+.account__action-bar-dropdown {
+	background: $black;
+	background-color: $black;
+	color: $white;
+	.fa-ellipsis-v {
+		color: $white;
+	}
+}
+.text-icon-button {
+	color: $white;
+}
+.account__header {
+	.account__header__username {
+		color: $color_pearl_bush_approx;
+	}
+	> div {
+		color: $white;
+		background: $black;
+	}
+}
+.button--block {
+	background-color: $yellow;
+	color: $black;
+}
+.confirmation-modal__action-bar {
+	background: $black;
+	.button {
+		background-color: $red;
+		color: $white;
+		//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+		border-radius: 0;
+	}
+}
+.mute-modal__action-bar {
+	background: $black;
+	.button {
+		background-color: $red;
+		color: $white;
+		//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+		border-radius: 0;
+	}
+}
+.confirmation-modal {
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 0;
+	background: $white;
+}
+.mute-modal {
+	background: $white;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 0;
+}
+.report-modal {
+	background: $white;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 0;
+}
+.content-wrapper {
+	background: $black;
+	color: $white;
+}
+.admin-wrapper {
+	.sidebar-wrapper {
+		background-color: $color_buttercup_approx;
+		color: $black;
+		//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+		border-radius: 0;
+	}
+	.sidebar {
+		background: $white;
+		color: $black;
+		//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+		border-radius: 0;
+		ul a {
+			background: $white;
+			color: $black;
+			//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+			border-radius: 0;
+		}
+	}
+}
+.card__bar {
+	background-color: $black;
+	.display-name span {
+		color: $color_pearl_bush_approx;
+	}
+}
+.card {
+	border: 1px solid $yellow;
+}
+::-webkit-scrollbar {
+	width: 10px;
+}
+::-webkit-scrollbar-track {
+	background: $color_cape_cod_approx;
+	border: 1px solid $white;
+}
+::-webkit-scrollbar-thumb {
+	background: $black;
+	border: 1px solid $white;
+}
+.status__content a:link {
+	color: $blue;
+}
+.getting-started__footer a {
+	color: $black;
+}
+.drawer__header a {
+	color: $white;
+}
+.status__display-name strong {
+	color: $color_boulder_approx;
+}
+.account__relationship .fa-user-times {
+	color: $blue;
+}
+.compose__action-bar-dropdown .fa-ellipsis-v {
+	color: $white;
+}
+.account--action-button .fa-user-times {
+	color: $white;
+}
+article > .account {
+	.display-name__html {
+		color: $white;
+	}
+	.fa-user-times {
+		color: $white;
+	}
+}
+#web a {
+	color: $blue;
+}
+.simple_form .hint {
+	color: $red;
+}
+#settings > .selected {
+	background: $gray;
+	color: $white;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 0;
+}

@@ -25,7 +25,7 @@ class Sanitize
 
       attributes: {
         'a'    => %w(href rel class),
-        'span' => %w(class),
+        'span' => %w(class data-bbcodesize data-bbcodecolor),
       },
 
       add_attributes: {
