@@ -80,6 +80,24 @@ $bbcode2: lighten($black, 15%) !default;
    &__s {
     text-decoration: line-through;
   }
+   &__caps {
+    text-transform: uppercase;
+  }
+   &__lower {
+    text-transform: lowercase;
+  }
+   &__kan {
+    text-transform: capitalize;
+  }
+   &__comic {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+  }
+   &__doc {
+    color: rgba(0, 0, 0, 0.0);
+  }
+   &__home {
+    font-family: "Courier New", Courier, monospace;
+  }
 }
  @keyframes pulse {
   0% {
