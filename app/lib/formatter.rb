@@ -36,22 +36,12 @@ class Formatter
     html = encode_and_link_urls(html, linkable_accounts)
     html = encode_custom_emojis(html, status.emojis, options[:autoplay]) if options[:custom_emojify]
     html = simple_format(html, {}, sanitize: false)
-    html = fix_newlines(html)
     html = html.delete("\n")
     html = format_bbcode(html)
 
     html.html_safe # rubocop:disable Rails/OutputSafety
 
-    replace = html.gsub(/^(<p>)?([\u{1F300}-\u{1F6FF}])(.*?)((<br>)|(<br><br>)|(<\/p>))?$/) { |match|
-        pclasses[$2] ? "#{$1}<span class='#{pclasses[$2]}'>#{$2}#{$3}</span>#{$4}" : match }
-
     replace.html_safe
-  end
-
-  def fix_newlines(html)
-    fix = html.gsub(/<\/p>\s*<p>/, "<br><br>\n")
-    fix.gsub(/<br \/>/, "<br>\n")
-  end
 
   def reformat(html)
     html = sanitize(html, Sanitize::Config::MASTODON_STRICT)
@@ -361,36 +351,31 @@ class Formatter
           :html_open => '<div style="text-align:right;">', :html_close => '</div>',
           :description => 'Right Align a text',
           :example => '[right]This is centered[/right].'},
-        :url => {
-          :html_open => '<a target="_blank" rel="nofollow noopener" href="%url%">%between%', :html_close => '</a>',
-          :description => 'Link to another page',
-          :example => '[url=http://www.google.com/]link[/url].',
-          :require_between => true,
-          :allow_quick_param => true, :allow_between_as_param => false,
-          :quick_param_format => /^((((http|https|ftp):\/\/)).+)$/,
-          :param_tokens => [{:token => :url}],
-          :quick_param_format_description => 'The URL should start with http:// https://, ftp://'},
         :caps => {
           :html_open => '<span class="bbcode__caps">', :html_close => '</span>',
-          :description => 'Uppercase',
-          :example => 'This is [caps]uppercase.[/caps].'},
+          :description => 'Capitalize',
+          :example => 'This is [caps]capitalize[/caps].'},
         :lower => {
           :html_open => '<span class="bbcode__lower">', :html_close => '</span>',
           :description => 'Lowercase',
-          :example => 'This is [lower]Lowercase[/lower].'},
+          :example => 'This is [lower]lowercase[/lower].'},
         :kan => {
           :html_open => '<span class="bbcode__kan">', :html_close => '</span>',
-          :description => 'capitalize',
-          :example => 'This is [kan]capitalize[/kan].'},
+          :description => 'uppercase',
+          :example => 'This is [kan]uppercase[/kan].'},
         :comic => {
           :html_open => '<span class="bbcode__comic">', :html_close => '</span>',
-          :description => 'Comic Sans',
-          :example => 'This is [comic]Comic Sans[/comic].'},
+          :description => 'comic sans',
+          :example => 'This is [comic]comic sans[/comic].'},
         :doc => {
           :html_open => '<span class="bbcode__doc">', :html_close => '</span>',
-          :description => 'Transparent',
-          :example => 'This is [doc]Transparent Text[/doc].'},
-      }, :enable, :i, :b, :color, :quote, :code, :size, :u, :s, :spin, :pulse, :flip, :large, :colorhex, :faicon, :center, :right, :url, :hex, :caps, :lower, :kan, :comic, :doc)
+          :description => 'transparent text',
+          :example => 'This is [doc]transparent text[/doc].'},
+        :home => {
+          :html_open => '<span class="bbcode__home">', :html_close => '</span>',
+          :description => 'Courier New',
+          :example => 'This is [home]Courier New[/home].'},
+      }, :enable, :i, :b, :color, :quote, :code, :size, :u, :s, :spin, :pulse, :flip, :large, :colorhex, :faicon, :center, :right, :caps, :lower, :kan, :comic, :doc, :home)
     rescue Exception => e
     end
     html
