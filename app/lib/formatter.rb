@@ -40,8 +40,7 @@ class Formatter
     html = format_bbcode(html)
 
     html.html_safe # rubocop:disable Rails/OutputSafety
-
-    replace.html_safe
+  end
 
   def reformat(html)
     html = sanitize(html, Sanitize::Config::MASTODON_STRICT)
