@@ -411,7 +411,7 @@ class Formatter
           :html_open => '<span class="bbcode__na">', :html_close => '</span>',
           :description => 'New Alternian',
           :example => 'This is [na]New Alternian[/na].'},
-      }, :enable, :i, :b, :color, :quote, :code, :size, :u, :s, :spin, :pulse, :flip, :large, :colorhex, :faicon, :center, :right, :caps, :lower, :kan, :comic, :doc, :home, :cute, :oa, :sc, :impact, :luci, :pap, :copap, :na)
+      }, :enable, :i, :b, :color, :quote, :code, :size, :u, :s, :spin, :pulse, :flip, :large, :colorhex, :faicon, :center, :right, :caps, :lower, :kan, :comic, :doc, :hs, :cute, :oa, :sc, :impact, :luci, :pap, :copap, :na)
     rescue Exception => e
     end
     html
