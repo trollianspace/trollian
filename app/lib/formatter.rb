@@ -42,6 +42,11 @@ class Formatter
     html.html_safe # rubocop:disable Rails/OutputSafety
   end
 
+  def fix_newlines(html)
+    fix = html.gsub(/<\/p>\s*<p>/, "<br><br>\n")
+    fix.gsub(/<br \/>/, "<br>\n")
+  end
+
   def reformat(html)
     html = sanitize(html, Sanitize::Config::MASTODON_STRICT)
     format_bbcode(html)
@@ -370,11 +375,43 @@ class Formatter
           :html_open => '<span class="bbcode__doc">', :html_close => '</span>',
           :description => 'transparent text',
           :example => 'This is [doc]transparent text[/doc].'},
-        :home => {
-          :html_open => '<span class="bbcode__home">', :html_close => '</span>',
+        :hs => {
+          :html_open => '<span class="bbcode__hs">', :html_close => '</span>',
           :description => 'Courier New',
-          :example => 'This is [home]Courier New[/home].'},
-      }, :enable, :i, :b, :color, :quote, :code, :size, :u, :s, :spin, :pulse, :flip, :large, :colorhex, :faicon, :center, :right, :caps, :lower, :kan, :comic, :doc, :home)
+          :example => 'This is [hs]Courier New[/hs].'},
+        :cute => {
+          :html_open => '<span class="bbcode__cute">', :html_close => '</span>',
+          :description => 'CUTE',
+          :example => 'This is [cute]CUTE[/cute].'},
+        :oa => {
+          :html_open => '<span class="bbcode__oa">', :html_close => '</span>',
+          :description => 'Old Alternian',
+          :example => 'This is [oa]Old Alternian[/oa].'},
+        :sc => {
+          :html_open => '<span class="bbcode__sc">', :html_close => '</span>',
+          :description => 'Small Caps',
+          :example => 'This is [sc]Small Caps[/sc].'},
+        :impact => {
+          :html_open => '<span class="bbcode__impact">', :html_close => '</span>',
+          :description => 'Impact',
+          :example => 'This is [impact]Impact[/impact].'},
+        :luci => {
+          :html_open => '<span class="bbcode__luci">', :html_close => '</span>',
+          :description => 'Lucida Sans',
+          :example => 'This is [luci]Lucida Sans[/luci].'},
+        :pap => {
+          :html_open => '<span class="bbcode__pap">', :html_close => '</span>',
+          :description => 'Papyrus',
+          :example => 'This is [pap]Papyrus[/pap].'},
+        :copap => {
+          :html_open => '<span class="bbcode__copap">', :html_close => '</span>',
+          :description => 'Comic Papyrus',
+          :example => 'This is [copap]Comic Papyrus[/copap].'},
+        :na => {
+          :html_open => '<span class="bbcode__na">', :html_close => '</span>',
+          :description => 'New Alternian',
+          :example => 'This is [na]New Alternian[/na].'},
+      }, :enable, :i, :b, :color, :quote, :code, :size, :u, :s, :spin, :pulse, :flip, :large, :colorhex, :faicon, :center, :right, :caps, :lower, :kan, :comic, :doc, :home, :cute, :oa, :sc, :impact, :luci, :pap, :copap, :na)
     rescue Exception => e
     end
     html

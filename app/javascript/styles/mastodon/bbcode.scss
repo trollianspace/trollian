@@ -3,6 +3,32 @@ $bbcode2: lighten($black, 15%) !default;
  .faicon_FTL {
   display: none;
 }
+
+ @font-face {
+  font-family: "Pappy";
+  src: url('PAPYRUS.TTF') format('truetype');
+}
+
+ @font-face {
+  font-family: "TrollType";
+  src: url('trolltype.ttf') format('truetype');
+}
+
+ @font-face {
+  font-family: "YANDERE";
+  src: url('YANDERE.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: "comicpapyrus";
+  src: url('Comic_Parchment.ttf') format('truetype');
+}
+
+ @font-face {
+  font-family: "NewAlternian";
+  src: url('NewAlternianVers3-Regular.ttf') format('truetype');
+}
+
  .bbcode {
    &__pulse {
     animation: pulse 1s ease-in-out infinite;
@@ -95,8 +121,37 @@ $bbcode2: lighten($black, 15%) !default;
    &__doc {
     color: rgba(0, 0, 0, 0.0);
   }
-   &__home {
+   &__hs {
     font-family: "Courier New", Courier, monospace;
+  }
+   &__cute {
+    font-family: "YANDERE";
+  }
+   &__oa {
+    font-family: "TrollType";
+  }
+   &__sc {
+    font-variant: small-caps;
+  }
+
+   &__impact {
+    font-family: "Impact", Charcoal, sans-serif;
+  }
+
+   &__luci {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+   }
+
+   &__pap {
+    font-family: "Pappy";
+  }
+
+   &__copap {
+    font-family: "comicpapyrus";
+  }
+
+   &__na {
+    font-family: "NewAlternian";
   }
 }
  @keyframes pulse {
