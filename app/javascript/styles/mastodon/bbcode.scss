@@ -3,6 +3,10 @@ $bbcode2: lighten($black, 15%) !default;
  .faicon_FTL {
   display: none;
 }
+ @font-face {
+  font-family: "Cute";
+  src: url('My_First_Crush.ttf') format('truetype');
+}
 
  @font-face {
   font-family: "Pappy";
@@ -124,7 +128,7 @@ $bbcode2: lighten($black, 15%) !default;
    &__hs {
     font-family: "Courier New", Courier, monospace;
   }
-   &__cute {
+   &__cute2 {
     font-family: "YANDERE";
   }
    &__oa {
@@ -152,6 +156,9 @@ $bbcode2: lighten($black, 15%) !default;
 
    &__na {
     font-family: "NewAlternian";
+  }
+   &__cute {
+    font-family: "Cute";
   }
 }
  @keyframes pulse {
