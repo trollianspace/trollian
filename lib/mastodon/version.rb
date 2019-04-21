@@ -9,11 +9,11 @@ module Mastodon
     end
 
     def minor
-      6
+      8
     end
 
     def patch
-      5
+      0
     end
 
     def pre

@@ -4,7 +4,7 @@ class AppSignUpService < BaseService
   def call(app, params)
     return unless allowed_registrations?
 
-    user_params    = params.slice(:email, :password, :agreement)
+    user_params    = params.slice(:email, :password, :agreement, :locale)
     account_params = params.slice(:username)
     user           = User.create!(user_params.merge(created_by_application: app, password_confirmation: user_params[:password], account_attributes: account_params))
 
@@ -18,6 +18,6 @@ class AppSignUpService < BaseService
   private
 
   def allowed_registrations?
-    Setting.open_registrations && !Rails.configuration.x.single_user_mode
+    Setting.registrations_mode != 'none' && !Rails.configuration.x.single_user_mode
   end
 end
