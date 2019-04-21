@@ -191,7 +191,6 @@ class PostStatusService < BaseService
     result = text
     quirks = @account.quirk.split(',')
     regexes = @account.regex.split(',')
-
     if quirks.length == regexes.length
       regexes.length.times do |i|
       exceptions = result.scan(/(?::\w+:|@\S+|https?:\/\/\S+|\[[^\]]+\])/)
@@ -201,5 +200,21 @@ class PostStatusService < BaseService
       end
     end
     return result
+  end
+
+def safe_hold(text, list)
+    output = text
+    list.each do |term|
+      output = output.sub(term,"۝")
+    end
+    return output
+  end
+
+  def safe_return(text, list)
+    output = text
+    list.each do |term|
+      output = output.sub("۝",term)
+    end
+    return output
   end
 end
