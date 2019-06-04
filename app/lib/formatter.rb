@@ -440,6 +440,10 @@ class Formatter
           :html_open => '<span class="bbcode__lower">', :html_close => '</span>',
           :description => 'Lowercase',
           :example => 'This is [lower]lowercase[/lower].'},
+        :break => {
+          :html_open => '<br>', :html_close => '</br>',
+          :description => 'Break',
+          :example => 'This is [br][/br] a break.'},
         :kan => {
           :html_open => '<span class="bbcode__kan">', :html_close => '</span>',
           :description => 'uppercase',
@@ -502,7 +506,7 @@ class Formatter
           :quick_param_format => /^((((http|https|ftp):\/\/)|\/).+)$/,
           :quick_param_format_description => 'The URL should start with http:// https://, ftp:// or /, instead of \'%param%\'',
           :param_tokens => [{ :token => :url }]},
-      }, :enable, :i, :b, :color, :quote, :code, :size, :u, :s, :spin, :pulse, :flip, :large, :colorhex, :faicon, :center, :right, :caps, :lower, :kan, :comic, :doc, :hs, :cute2, :oa, :sc, :impact, :luci, :pap, :copap, :na, :cute, :img, :url, :width, :height)
+      }, :enable, :i, :b, :color, :quote, :code, :size, :u, :s, :spin, :pulse, :flip, :large, :colorhex, :hex, :faicon, :center, :right, :caps, :lower, :kan, :comic, :doc, :hs, :cute2, :oa, :sc, :impact, :luci, :pap, :copap, :na, :cute, :img, :url, :width, :height, :break)
     rescue Exception => e
     end
     html
