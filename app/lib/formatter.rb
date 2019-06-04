@@ -37,7 +37,10 @@ class Formatter
 
     html = raw_content
     html = "RT @#{prepend_reblog} #{html}" if prepend_reblog
-    html = encode_and_link_urls(html, linkable_accounts)
+    useless = raw_content.match(/\[img.*\]/)
+    if useless == nil
+      html = encode_and_link_urls(html, linkable_accounts)
+    end
     html = encode_custom_emojis(html, status.emojis, options[:autoplay]) if options[:custom_emojify]
     html = simple_format(html, {}, sanitize: false)
     html = html.delete("\n")
@@ -100,7 +103,12 @@ class Formatter
   end
 
   def linkify(text)
+    useless = text.match(/\[img.*\]/)
+    if useless == nil
     html = encode_and_link_urls(text)
+    else
+    html = text
+    end
     html = simple_format(html, {}, sanitize: false)
     html = html.delete("\n")
     html = format_bbcode(html)
@@ -223,7 +231,7 @@ class Formatter
     result.flatten.join
   end
 
-  UNICODE_ESCAPE_BLACKLIST_RE = /\p{Z}|\p{P}/
+  UNICODE_ESCAPE_BLACKLIST_RE = /\[img\]|\p{Z}|\p{P}|/
 
   def utf8_friendly_extractor(text, options = {})
     old_to_new_index = [0]
@@ -333,6 +341,18 @@ class Formatter
 
    begin
       html = html.bbcode_to_html(false, {
+      :img => {
+        :html_open => '<img src="%between%" %width%%height%alt="" />', :html_close => '',
+        :description => 'Image',
+        :example => '[img]http://www.google.com/intl/en_ALL/images/logo.gif[/img].',
+        :only_allow => [],
+        :require_between => true,
+        :allow_quick_param => true, 
+        :allow_between_as_param => false,
+        :quick_param_format => /^(\d+)x(\d+)$/,
+        :param_tokens => [{ :token => :width, :prefix => 'width="', :postfix => '" ', :optional => true },
+                              { :token => :height,  :prefix => 'height="', :postfix => '" ', :optional => true } ],
+        :quick_param_format_description => 'The image parameters \'%param%\' are incorrect, \'<width>x<height>\' excepted'},
         :spin => {
           :html_open => '<span class="bbcode__spin">', :html_close => '</span>',
           :description => 'Make text spin',
@@ -472,7 +492,17 @@ class Formatter
           :html_open => '<span class="bbcode__cute">', :html_close => '</span>',
           :description => 'Cute',
           :example => 'This is [cute]Cute[/cute].'},
-      }, :enable, :i, :b, :color, :quote, :code, :size, :u, :s, :spin, :pulse, :flip, :large, :colorhex, :faicon, :center, :right, :caps, :lower, :kan, :comic, :doc, :hs, :cute2, :oa, :sc, :impact, :luci, :pap, :copap, :na, :cute)
+        :url => {
+          :html_open => '<a href="%url%">%between%', :html_close => '</a>',
+          :description => 'Link to another page',
+          :example => '[url]http://www.google.com/[/url].',
+          :only_allow => [],
+          :require_between => true,
+          :allow_quick_param => true, :allow_between_as_param => true,
+          :quick_param_format => /^((((http|https|ftp):\/\/)|\/).+)$/,
+          :quick_param_format_description => 'The URL should start with http:// https://, ftp:// or /, instead of \'%param%\'',
+          :param_tokens => [{ :token => :url }]},
+      }, :enable, :i, :b, :color, :quote, :code, :size, :u, :s, :spin, :pulse, :flip, :large, :colorhex, :faicon, :center, :right, :caps, :lower, :kan, :comic, :doc, :hs, :cute2, :oa, :sc, :impact, :luci, :pap, :copap, :na, :cute, :img, :url, :width, :height)
     rescue Exception => e
     end
     html
