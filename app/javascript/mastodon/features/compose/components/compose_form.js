@@ -88,7 +88,7 @@ class ComposeForm extends ImmutablePureComponent {
     const { isSubmitting, isChangingUpload, isUploading, anyMedia } = this.props;
     const fulltext = [this.props.spoilerText, countableText(this.props.text)].join('');
 
-    if (is_submitting || is_uploading || is_changing_upload || length(fulltext) > 12000 || (fulltext.length !== 0 && fulltext.trim().length === 0 && !anyMedia)) {
+    if (isSubmitting || isUploading || isChangingUpload || length(fulltext) > 12000 || (fulltext.length !== 0 && fulltext.trim().length === 0 && !anyMedia)) {
       return;
     }
 
@@ -179,9 +179,9 @@ class ComposeForm extends ImmutablePureComponent {
 
   render () {
     const { intl, onPaste, showSearch, anyMedia } = this.props;
-    const disabled = this.props.is_submitting;
-    const text     = [this.props.spoiler_text, countableText(this.props.text)].join('');
-    const disabledButton = disabled || this.props.is_uploading || this.props.is_changing_upload || length(text) > 12000 || (text.length !== 0 && text.trim().length === 0 && !anyMedia);
+    const disabled = this.props.isSubmitting;
+    const text     = [this.props.spoilerText, countableText(this.props.text)].join('');
+    const disabledButton = disabled || this.props.isUploading || this.props.isChangingUpload || length(text) > 12000 || (text.length !== 0 && text.trim().length === 0 && !anyMedia);
     let publishText = '';
 
     if (this.props.privacy === 'private' || this.props.privacy === 'direct') {
