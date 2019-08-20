@@ -1,0 +1,601 @@
+@import 'application';
+
+//colors
+$white_90: rgba(255, 255, 255, 0.9);
+$color_mine_shaft_approx: #333;
+$color_curious_blue_80_approx: rgba(37, 136, 208,0.8);
+$white: #fff;
+$color_astronaut_blue_approx: rgba(10, 65, 100,1);
+$black_20: rgba(0, 0, 0,0.2);
+$color_curious_blue_25_approx: rgba(37, 136, 208,0.25);
+$color_viking_approx: rgba(111, 178, 226,1);
+$white_100: rgba(255,255,255,1);
+$color_red_violet_90_approx: rgba(208, 17, 133,0.9);
+$color_red_violet_approx: rgba(208, 17, 133,1);
+$color_tuna_50_approx: rgba(49, 53, 67, 0.5);
+$color_gallery_approx: rgba(240, 240, 240,1);
+$black_5: rgba(0,0,0,0.05);
+$color_curious_blue_approx: rgba(37, 136, 208,1);
+$color_celeste_approx: #ccc;
+$color_bon_jour_approx: rgba(225, 225, 225,1);
+$color_astronaut_blue_50_approx: rgba(10, 65, 100,0.5);
+$color_tropical_blue_50_approx: rgba(200,222,243,0.5);
+$color_curious_blue_60_approx: rgba(37, 136, 208,0.6);
+$color_storm_dust_approx: rgba(102, 102, 102,1);
+$white_60: rgba(255, 255, 255, 0.6);
+$color_tuna_approx: rgba(49,53,67,1);
+$white_80: rgba(255,255,255,0.8);
+$white_25: rgba(255,255,255,0.25);
+$black_50: rgba(0,0,0,0.5);
+$black_100: rgba(0, 0, 0,1);
+$color_tropical_blue_15_approx: rgba(200,222,243,0.15);
+$color_selective_yellow_25_approx: rgba(250, 180, 0, 0.025);
+$color_curious_blue_40_approx: rgba(37, 136, 208,0.4);
+$color_selective_yellow_approx: rgba(250, 180, 0, 1);
+$color_mystic_approx: #e6ecf0;
+$color_curious_blue_5_approx: rgba(37, 136, 208,0.05);
+$color_astronaut_blue_80_approx: rgba(10, 65, 100,0.8);
+$color_midnight_60_approx: rgba(0,30,50,0.6);
+$color_midnight_approx: rgba(0,30,50,1);
+$color_viking_50_approx: rgba(111, 178, 226,0.5);
+$color_rock_blue_approx: #9baec8;
+$color_midnight_95_approx: rgba(0,30,50,0.95);
+$color_midnight_40_approx: rgba(0,30,50,0.4);
+$color_midnight_90_approx: rgba(0,30,50,0.9);
+$color_mountain_mist_approx: #999;
+
+//urls
+$url_0: url(https://eunivers.social/system/media_attachments/files/bgBody.jpg);
+$url_1: url(https://eunivers.social/system/media_attachments/files/cloud2.png);
+$url_2: url(https://eunivers.social/system/media_attachments/files/cloud1.png);
+$url_3: url(https://eunivers.social/system/media_attachments/files/cloud3.png);
+
+//@extend-elements
+//original selectors
+//body.app-body, body.about-body
+%extend_1 {
+	background: $color_astronaut_blue_approx $url_0 no-repeat 0 0;
+	background-size: cover;
+	background-attachment: fixed;
+}
+
+//original selectors
+//.column >.scrollable, .empty-column-indicator
+%extend_2 {
+	background: $white_100;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 0 0 0.25rem 0.25rem;
+	color: $color_mine_shaft_approx;
+}
+
+@media (min-width: 1024px){
+    .tabs-bar {display: flex;
+    width: 635px;
+    margin-left: calc(25% + 155px);
+    z-index: 1;
+  }
+}
+
+.tabs-bar {
+	background: $white_90;
+	> a:first-child {
+		display: none;
+	}
+}
+.columns-area {
+	width: calc(50% +300px);
+	margin: -60px auto auto;
+}
+.column {
+	display: none;
+	&:last-child {
+		display: flex;
+		min-width: 600px;
+		margin-top: 55px;
+	}
+	> .scrollable {
+		@extend %extend_2;
+	}
+}
+.tabs-bar__link {
+	color: $color_mine_shaft_approx;
+	&:hover {
+		background: $color_curious_blue_80_approx;
+	}
+	&:focus {
+		background: $color_curious_blue_80_approx;
+	}
+	&:active {
+		background: $color_curious_blue_80_approx;
+	}
+	&.active {
+		background: $color_curious_blue_80_approx;
+		color: $white;
+		border-bottom: 2px solid $white;
+	}
+}
+body {
+	font-size: 14px;
+	line-height: 1rem;
+	padding-bottom: 50px;
+	background: $color_astronaut_blue_approx $url_0 no-repeat fixed;
+	&.admin {
+		background: $color_astronaut_blue_approx;
+	}
+	&.app-body {
+		@extend %extend_1;
+	}
+	&.about-body {
+		@extend %extend_1;
+	}
+}
+.admin-wrapper {
+	.sidebar-wrapper {
+		background: $black_20;
+	}
+	.sidebar ul a.selected {
+		background: $color_curious_blue_25_approx;
+	}
+}
+.about-body {
+	.actions .info a {
+		color: $color_viking_approx;
+		&:hover {
+			color: $white_100;
+		}
+	}
+	p a {
+		color: $color_viking_approx;
+		&:hover {
+			color: $white_100;
+		}
+	}
+	li a {
+		color: $color_viking_approx;
+		&:hover {
+			color: $white_100;
+		}
+	}
+}
+.webapp-btn {
+	display: block;
+	width: 100%;
+	border: 0 none;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 4px;
+	background: $color_red_violet_90_approx;
+	color: $white_100 !important;
+	font-size: 18px;
+	padding: 10px;
+	text-transform: uppercase;
+	text-decoration: none;
+	text-align: center;
+	//Instead of the line below you could use @include box-sizing($bs)
+	box-sizing: border-box;
+	margin-bottom: 0.5rem;
+	&:hover {
+		background: $color_red_violet_approx;
+	}
+}
+.simple_form {
+	button {
+		margin-bottom: 2rem;
+	}
+	.block-button {
+		margin-bottom: 2rem;
+	}
+	p.hint.subtle-hint {
+		color: $white_80;
+	}
+}
+.screenshot-with-signup {
+	.simple_form {
+		width: 50%;
+		min-width: 300px;
+	}
+	.closed-registrations-message {
+		width: 50%;
+		min-width: 300px;
+	}
+}
+.regeneration-indicator {
+	background: $white_100;
+}
+.ui {
+	background: $color_tuna_50_approx;
+}
+.empty-column-indicator {
+	@extend %extend_2;
+}
+.column-back-button {
+	background: $color_gallery_approx;
+	//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+	box-shadow: inset 0 5px 5px $black_5;
+	border-bottom: 1px solid transparent;
+	height: auto;
+}
+.column-header {
+	background: $color_curious_blue_approx;
+	border-bottom: 1px solid $color_celeste_approx;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 0.25rem 0.25rem 0 0;
+}
+.column-icon {
+	background: transparent !important;
+	color: $white_100;
+}
+.collapsable-collapsed {
+	background: transparent !important;
+	color: $white_100;
+}
+.column-header__back-button {
+	background: $color_bon_jour_approx;
+	color: $color_curious_blue_approx;
+}
+.column-header__button {
+	background: $color_bon_jour_approx;
+	color: $color_curious_blue_approx;
+	&.active {
+		background: $color_astronaut_blue_approx;
+		&:hover {
+			background: $color_astronaut_blue_approx;
+		}
+	}
+}
+.muted {
+	.status__content {
+		a {
+			color: $color_astronaut_blue_50_approx;
+		}
+		p {
+			color: $color_astronaut_blue_50_approx;
+		}
+	}
+	.status__display-name strong {
+		color: $color_astronaut_blue_50_approx;
+	}
+}
+.column-link {
+	background: $color_gallery_approx;
+	border-bottom: 1px solid $color_celeste_approx;
+	color: $color_mine_shaft_approx;
+	//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+	box-shadow: inset 0 5px 5px $black_5;
+	&:hover {
+		background: $color_tropical_blue_50_approx;
+		color: $white_100;
+	}
+}
+.drawer__header {
+	background: transparent;
+	a:hover {
+		background: $color_curious_blue_60_approx;
+	}
+}
+.getting-started {
+	background: $white no-repeat 0 100% local;
+	p {
+		color: $color_storm_dust_approx;
+	}
+}
+.drawer__inner__mastodon {
+	display: none;
+}
+.column-subheading {
+	background: $white_100;
+}
+.account__moved-note__message {
+	color: $white_60;
+}
+.reply-indicator__content {
+	color: $color_mine_shaft_approx;
+	.status__content__spoiler-link {
+		background: $color_tuna_approx;
+		line-height: 1.2rem;
+	}
+	a {
+		color: $white_100;
+	}
+}
+.status__content {
+	color: $color_mine_shaft_approx;
+	a {
+		color: $color_curious_blue_approx;
+	}
+	.status__content__spoiler-link {
+		background: $color_tuna_approx;
+		line-height: 1.2rem;
+	}
+}
+.status {
+	border-bottom: 1px solid $color_celeste_approx;
+	&.status-direct:not(.read) {
+		background: $color_selective_yellow_25_approx;
+		border-bottom: 1px solid $color_celeste_approx;
+	}
+}
+.account {
+	border-bottom: 1px solid $color_celeste_approx;
+}
+.account__header {
+	background: $color_astronaut_blue_approx;
+	> div {
+		background: $color_astronaut_blue_50_approx;
+	}
+	.icon-button {
+		color: $white_80;
+		&:hover {
+			color: $white_100;
+		}
+	}
+}
+.account__action-bar {
+	background: $color_astronaut_blue_approx;
+	border-top: 1px solid $white_25;
+	border-bottom: 1px solid $white_25;
+	.icon-button {
+		color: $white_80;
+		&:hover {
+			color: $white_100;
+		}
+	}
+}
+.account__action-bar__tab {
+	border-left: 1px solid $white_25;
+}
+.detailed-status {
+	background: $color_tropical_blue_50_approx;
+	color: $color_mine_shaft_approx;
+}
+.detailed-status__display-name {
+	color: $black_50;
+	strong {
+		color: $black_100;
+	}
+}
+.detailed-status__meta {
+	color: $black_50;
+}
+.detailed-status__action-bar {
+	background: $black_5;
+	border-top: 1px solid $color_celeste_approx;
+	border-bottom: 1px solid $color_celeste_approx;
+	//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+	box-shadow: inset 0 5px 5px $black_5;
+}
+.notification {
+	background: $color_tropical_blue_15_approx;
+}
+.drawer__inner {
+	border: 1px solid $color_mystic_approx;
+	background: $white_90;
+	//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+	box-shadow: inset 0 5px 5px $black_5;
+	color: $color_mine_shaft_approx;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 0.25rem;
+	height: auto;
+	max-height: 100%;
+	overflow-y: auto;
+	.text-icon-button {
+		color: $color_curious_blue_60_approx;
+		&:hover {
+			color: $color_curious_blue_40_approx;
+		}
+	}
+	&.darker {
+		background: $white_100;
+		.account:hover {
+			background: $color_curious_blue_5_approx;
+		}
+	}
+	.icon-button.inverted {
+		color: $color_curious_blue_60_approx;
+		&:hover {
+			color: $color_curious_blue_40_approx;
+		}
+	}
+}
+@keyframes spin {
+	from {
+		//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+		transform: rotate(0deg);
+	}
+	to {
+		//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+		transform: rotate(360deg);
+	}
+}
+.search__input {
+	background: $white_100;
+}
+.compose-form__buttons {
+	background: transparent;
+	//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+	box-shadow: none;
+}
+.search-results__header {
+	background: $white_100;
+}
+.reply-indicator {
+	max-height: 160px;
+	overflow-y: auto;
+}
+.landing-page {
+	.header-wrapper {
+		background: $color_astronaut_blue_80_approx;
+		&.compact {
+			background: $color_astronaut_blue_80_approx;
+		}
+	}
+	.header {
+		.hero {
+			.closed-registrations-message {
+				background: $color_midnight_60_approx;
+			}
+			.simple_form {
+				background: $color_midnight_95_approx;
+			}
+			.floats {
+				.float-1 {
+					background-image: $url_1;
+				}
+				.float-2 {
+					background-image: $url_2;
+				}
+				.float-3 {
+					background-image: $url_3;
+				}
+			}
+		}
+		.links ul li:first-child a {
+			padding: 0.25rem 1rem !important;
+		}
+	}
+	p {
+		color: $white_80;
+	}
+	.extended-description {
+		li {
+			color: $white_80;
+		}
+		p {
+			color: $white_80;
+		}
+	}
+	.information-board {
+		background: $color_midnight_60_approx;
+		.panel {
+			background: $color_midnight_approx;
+			.panel-header {
+				color: $color_rock_blue_approx;
+				a {
+					color: $color_rock_blue_approx;
+				}
+				span {
+					color: $color_rock_blue_approx;
+				}
+			}
+		}
+	}
+	.learn-more-cta {
+		background: $color_midnight_60_approx;
+	}
+	#mastodon-timeline {
+		background: $color_midnight_60_approx;
+		p {
+			color: $color_midnight_approx;
+			a {
+				color: $color_viking_approx;
+				&:hover {
+					color: $color_curious_blue_approx;
+				}
+			}
+		}
+	}
+	h1 small {
+		color: $white_80;
+	}
+	.separator-or span {
+		background: $color_midnight_40_approx;
+	}
+}
+.sidebar-layout {
+	.sidebar {
+		border-left: 1px solid $color_viking_50_approx;
+	}
+	.panel .panel-header {
+		background: $color_viking_50_approx;
+	}
+}
+.landing-page__forms {
+	background: $color_midnight_60_approx;
+}
+.landing-page__information {
+	background: $color_midnight_60_approx;
+}
+.landing-page__call-to-action {
+	background: $color_midnight_90_approx;
+}
+::-webkit-scrollbar-thumb {
+	background: $color_mountain_mist_approx;
+	&:hover {
+		background: $white_60;
+	}
+}
+.column-header__collapsible > div {
+	background: $color_astronaut_blue_approx;
+}
+.account__moved-note .detailed-status__display-name {
+	span {
+		color: $white_60;
+	}
+	strong {
+		color: $white_100 !important;
+	}
+}
+.status__display-name strong {
+	color: $color_tuna_approx;
+}
+.account__display-name strong {
+	color: $color_tuna_approx;
+}
+.status__content__spoiler-link span {
+	color: $white_100;
+}
+.notification__message a:hover {
+	color: $color_curious_blue_approx;
+}
+.icon-button.active {
+	color: $color_curious_blue_approx;
+}
+button.icon-button {
+	i.fa-retweet {
+		background: none transparent;
+		&:after {
+			height: 19px;
+			width: 22px;
+			content: "\f079";
+			display: block;
+		}
+	}
+	&.active i.fa-retweet {
+		color: $color_selective_yellow_approx;
+		&:after {
+			animation: spin 0.5s linear;
+		}
+	}
+}
+.scrollable .status .icon-button {
+	color: $color_curious_blue_60_approx;
+	&:hover {
+		color: $color_curious_blue_40_approx;
+	}
+	&.star-icon.active {
+		color: $color_selective_yellow_approx;
+	}
+}
+.notification__favourite-icon-wrapper .star-icon {
+	color: $color_selective_yellow_approx;
+}
+.navigation-bar strong {
+	font-size: 1rem;
+	color: $color_tuna_approx;
+}
+.features-list__row .text {
+	color: $white_80;
+}
+.extended-description .container {
+	background: $color_midnight_60_approx;
+	padding: 1rem;
+}
+.features .container {
+	background: $color_midnight_60_approx;
+	padding: 1rem;
+}
+.button.button-alternative-2 {
+	background: $color_red_violet_90_approx;
+}
+::-webkit-scrollbar:hover {
+	background: rgba(0,0,0,0);
+}

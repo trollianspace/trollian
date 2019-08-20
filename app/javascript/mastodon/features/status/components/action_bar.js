@@ -136,7 +136,7 @@ class ActionBar extends React.PureComponent {
   render () {
     const { status, intl } = this.props;
 
-    const publicStatus = ['public', 'unlisted'].includes(status.get('visibility'));
+    const publicStatus = ['public', 'unlisted', 'local'].includes(status.get('visibility'));
     const mutingConversation = status.get('muted');
 
     let menu = [];

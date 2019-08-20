@@ -531,6 +531,8 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 1.7)
+    ruby-bbcode (2.0.2)
+      activesupport (>= 3.2.3)
     rubocop-rails (2.0.1)
       rack (>= 1.1)
       rubocop (>= 0.70.0)
@@ -739,6 +741,7 @@ DEPENDENCIES
   rspec-sidekiq (~> 3.0)
   rubocop (~> 0.71)
   rubocop-rails (~> 2.0)
+  ruby-bbcode
   sanitize (~> 5.0)
   sidekiq (~> 5.2)
   sidekiq-bulk (~> 0.2.0)

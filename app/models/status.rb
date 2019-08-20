@@ -38,7 +38,7 @@ class Status < ApplicationRecord
 
   update_index('statuses#status', :proper) if Chewy.enabled?
 
-  enum visibility: [:public, :unlisted, :private, :direct, :limited], _suffix: :visibility
+  enum visibility: [:public, :unlisted, :private, :direct, :local, :limited], _suffix: :visibility
 
   belongs_to :application, class_name: 'Doorkeeper::Application', optional: true
 
@@ -83,6 +83,7 @@ class Status < ApplicationRecord
   scope :without_replies, -> { where('statuses.reply = FALSE OR statuses.in_reply_to_account_id = statuses.account_id') }
   scope :without_reblogs, -> { where('statuses.reblog_of_id IS NULL') }
   scope :with_public_visibility, -> { where(visibility: :public) }
+  scope :with_local_visibility, -> { where(visibility: :local).or(where(visibility: :public)) }
   scope :tagged_with, ->(tag) { joins(:statuses_tags).where(statuses_tags: { tag_id: tag }) }
   scope :excluding_silenced_accounts, -> { left_outer_joins(:account).where(accounts: { silenced_at: nil }) }
   scope :including_silenced_accounts, -> { left_outer_joins(:account).where.not(accounts: { silenced_at: nil }) }
@@ -201,7 +202,7 @@ class Status < ApplicationRecord
   end
 
   def distributable?
-    public_visibility? || unlisted_visibility?
+    public_visibility? || unlisted_visibility? || local_visibility?
   end
 
   alias sign? distributable?
@@ -277,7 +278,7 @@ class Status < ApplicationRecord
     end
 
     def as_home_timeline(account)
-      where(account: [account] + account.following).where(visibility: [:public, :unlisted, :private])
+      where(account: [account] + account.following).where(visibility: [:public, :unlisted, :local, :private])
     end
 
     def as_direct_timeline(account, limit = 20, max_id = nil, since_id = nil, cache_ids = false)
@@ -365,7 +366,7 @@ class Status < ApplicationRecord
 
       return if account_ids.empty?
 
-      accounts = Account.where(id: account_ids).includes(:account_stat).each_with_object({}) { |a, h| h[a.id] = a }
+      accounts = Account.where(id: account_ids).each_with_object({}) { |a, h| h[a.id] = a }
 
       cached_items.each do |item|
         item.account = accounts[item.account_id]
@@ -374,7 +375,7 @@ class Status < ApplicationRecord
     end
 
     def permitted_for(target_account, account)
-      visibility = [:public, :unlisted]
+      visibility = [:public, :unlisted, :local]
 
       if account.nil?
         where(visibility: visibility)
@@ -399,9 +400,15 @@ class Status < ApplicationRecord
 
     def timeline_scope(local_only = false)
       starting_scope = local_only ? Status.local : Status
-      starting_scope
-        .with_public_visibility
-        .without_reblogs
+      if local_only
+        starting_scope
+          .with_local_visibility
+          .without_reblogs
+      else
+        starting_scope
+          .with_public_visibility
+          .without_reblogs
+      end
     end
 
     def apply_timeline_filters(query, account, local_only)
@@ -491,7 +498,7 @@ class Status < ApplicationRecord
   end
 
   def update_statistics
-    return unless public_visibility? || unlisted_visibility?
+    return unless public_visibility? || unlisted_visibility? || local_visibility?
     ActivityTracker.increment('activity:statuses:local')
   end
 
@@ -500,7 +507,7 @@ class Status < ApplicationRecord
 
     account&.increment_count!(:statuses_count)
     reblog&.increment_count!(:reblogs_count) if reblog?
-    thread&.increment_count!(:replies_count) if in_reply_to_id.present? && (public_visibility? || unlisted_visibility?)
+    thread&.increment_count!(:replies_count) if in_reply_to_id.present? && (public_visibility? || unlisted_visibility? || local_visibility?)
   end
 
   def decrement_counter_caches
@@ -508,7 +515,7 @@ class Status < ApplicationRecord
 
     account&.decrement_count!(:statuses_count)
     reblog&.decrement_count!(:reblogs_count) if reblog?
-    thread&.decrement_count!(:replies_count) if in_reply_to_id.present? && (public_visibility? || unlisted_visibility?)
+    thread&.decrement_count!(:replies_count) if in_reply_to_id.present? && (public_visibility? || unlisted_visibility? || local_visibility?)
   end
 
   def unlink_from_conversations

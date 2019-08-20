@@ -30,6 +30,11 @@ RSpec.describe ActivityPub::TagManager do
       expect(subject.to(status)).to eq [account_followers_url(status.account)]
     end
 
+    it 'returns followers collection for local status' do
+      status = Fabricate(:status, visibility: :local)
+      expect(subject.to(status)).to eq [account_followers_url(status.account)]
+    end
+
     it 'returns followers collection for private status' do
       status = Fabricate(:status, visibility: :private)
       expect(subject.to(status)).to eq [account_followers_url(status.account)]
@@ -69,6 +74,12 @@ RSpec.describe ActivityPub::TagManager do
       status = Fabricate(:status, visibility: :unlisted)
       expect(subject.cc(status)).to eq ['https://www.w3.org/ns/activitystreams#Public']
     end
+
+    it 'returns public collection for local status' do
+      status = Fabricate(:status, visibility: :local)
+      expect(subject.cc(status)).to eq ['https://www.w3.org/ns/activitystreamsreams#Public']
+    end
+
 
     it 'returns empty array for private status' do
       status = Fabricate(:status, visibility: :private)

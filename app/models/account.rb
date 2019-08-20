@@ -41,10 +41,14 @@
 #  featured_collection_url :string
 #  fields                  :jsonb
 #  actor_type              :string
+#  quirk                   :text
+#  regex                   :text
 #  discoverable            :boolean
 #  also_known_as           :string           is an Array
 #  silenced_at             :datetime
 #  suspended_at            :datetime
+#  quirk                   :text
+#  regex                   :text
 #
 
 class Account < ApplicationRecord
@@ -74,8 +78,9 @@ class Account < ApplicationRecord
   validates :username, format: { with: /\A[a-z0-9_]+\z/i }, length: { maximum: 30 }, if: -> { local? && will_save_change_to_username? }
   validates_with UniqueUsernameValidator, if: -> { local? && will_save_change_to_username? }
   validates_with UnreservedUsernameValidator, if: -> { local? && will_save_change_to_username? }
-  validates :display_name, length: { maximum: 30 }, if: -> { local? && will_save_change_to_display_name? }
-  validates :note, note_length: { maximum: 500 }, if: -> { local? && will_save_change_to_note? }
+  validates :display_name, length: { maximum: 60 }, if: -> { local? && will_save_change_to_display_name? }
+  validates :note, length: { maximum: 2000 }, if: -> { local? && will_save_change_to_note? }
+  validate :note_has_twenty_newlines?, if: -> { local? && will_save_change_to_note? }
   validates :fields, length: { maximum: 4 }, if: -> { local? && will_save_change_to_fields? }
 
   scope :remote, -> { where.not(domain: nil) }
@@ -316,10 +321,8 @@ class Account < ApplicationRecord
   def save_with_optional_media!
     save!
   rescue ActiveRecord::RecordInvalid
-    self.avatar              = nil
-    self.header              = nil
-    self[:avatar_remote_url] = ''
-    self[:header_remote_url] = ''
+    self.avatar = nil if errors[:avatar].present?
+    self.header = nil if errors[:header].present?
     save!
   end
 
@@ -341,6 +344,10 @@ class Account < ApplicationRecord
 
   def preferred_inbox_url
     shared_inbox_url.presence || inbox_url
+  end
+
+  def note_has_twenty_newlines?
+    errors.add(:note, 'Bio can\'t have more then 20 newlines') unless note.count("\n") <= 20
   end
 
   class Field < ActiveModelSerializers::Model

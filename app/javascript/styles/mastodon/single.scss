@@ -1,0 +1,31 @@
+//////////////////////////////////////////////////////
+//////Author: SANmeiji
+//////License: CC BY-NC - Creative Commons Attribution-NonCommercial
+//////Date Created: April 28, 2018
+//////Last Updated: April 28, 2018
+/////////////////////////////////////////////////////
+
+@media(min-width: 850px) {
+	.tabs-bar {
+		display: flex;
+		width: 830px;
+		margin: 10px auto 1px auto;
+	}
+	.columns-area {
+		width: 850px;
+		margin: auto auto auto auto;
+	}
+	.drawer__header {
+		display: none;
+	}
+	.column {
+		display: none;
+		&:last-child {
+			display: flex;
+			width: 550px;
+		}
+	}
+	.column-header__wrapper {
+		display: none;
+	}
+}

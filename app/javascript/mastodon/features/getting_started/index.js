@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Column from '../ui/components/column';
 import ColumnLink from '../ui/components/column_link';
@@ -33,7 +34,10 @@ const messages = defineMessages({
   personal: { id: 'navigation_bar.personal', defaultMessage: 'Personal' },
   security: { id: 'navigation_bar.security', defaultMessage: 'Security' },
   menu: { id: 'getting_started.heading', defaultMessage: 'Getting started' },
-  profile_directory: { id: 'getting_started.directory', defaultMessage: 'Profile directory' },
+  rules: { id: 'getting_started.rules', defaultMessage: 'Rules' },
+  quirk: { id: 'getting_started.quirk', defaultMessage: 'Quirk Guide' },
+  trello: { id: 'getting_started.trello', defaultMessage: 'Suggestions Board' },
+  discord: { id: 'getting_started.discord', defaultMessage: 'Discord' },
 });
 
 const mapStateToProps = state => ({
@@ -100,29 +104,14 @@ class GettingStarted extends ImmutablePureComponent {
         <ColumnSubheading key={i++} text={intl.formatMessage(messages.discover)} />,
         <ColumnLink key={i++} icon='users' text={intl.formatMessage(messages.community_timeline)} to='/timelines/public/local' />,
         <ColumnLink key={i++} icon='globe' text={intl.formatMessage(messages.public_timeline)} to='/timelines/public' />,
-      );
-
-      height += 34 + 48*2;
-
-      if (profile_directory) {
-        navItems.push(
-          <ColumnLink key={i++} icon='address-book' text={intl.formatMessage(messages.profile_directory)} href='/explore' />
-        );
-
-        height += 48;
-      }
-
-      navItems.push(
+        <ColumnLink key={i++} icon='book' text={intl.formatMessage(messages.rules)} href='/about/more' />,
+        <ColumnLink key={i++} icon='list' text={intl.formatMessage(messages.quirk)} href='https://plushrump.neocities.org/quirks.html' />,
+        <ColumnLink key={i++} icon='trello' text={intl.formatMessage(messages.trello)} href='https://trello.com/invite/b/QoFxgAZO/8ca1417d9353d443ecb165a254e3502c/trollianspace-things-to-do-please-only-add-requests-to-the-requests-list-i-dont-have-a-way-to-turn-off-commenting-on-all-but-one' />,
+        <ColumnLink key={i++} icon='commenting' text={intl.formatMessage(messages.discord)} href='https://discord.gg/uW2dCYm' />,
         <ColumnSubheading key={i++} text={intl.formatMessage(messages.personal)} />
       );
 
-      height += 34;
-    } else if (profile_directory) {
-      navItems.push(
-        <ColumnLink key={i++} icon='address-book' text={intl.formatMessage(messages.profile_directory)} href='/explore' />
-      );
-
-      height += 48;
+      height += 34*6 + 48*6;
     }
 
     navItems.push(

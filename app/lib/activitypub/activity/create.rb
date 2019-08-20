@@ -42,7 +42,7 @@ class ActivityPub::Activity::Create < ActivityPub::Activity
     resolve_thread(@status)
     fetch_replies(@status)
     distribute(@status)
-    forward_for_reply if @status.public_visibility? || @status.unlisted_visibility?
+    forward_for_reply if @status.public_visibility? || @status.unlisted_visibility? || @status.public_visibility?
   end
 
   def find_existing_status
@@ -279,6 +279,8 @@ class ActivityPub::Activity::Create < ActivityPub::Activity
       :public
     elsif equals_or_includes?(@object['cc'], ActivityPub::TagManager::COLLECTIONS[:public])
       :unlisted
+    elsif equals_or_includes?(@object['cc'], ActivityPub::TagManager::COLLECTIONS[:public])
+      :local
     elsif equals_or_includes?(@object['to'], @account.followers_url)
       :private
     else

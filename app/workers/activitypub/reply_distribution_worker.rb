@@ -24,6 +24,10 @@ class ActivityPub::ReplyDistributionWorker
 
   private
 
+  def skip_distribution?
+    @status.private_visibility? || @status.direct_visibility?
+  end
+
   def inboxes
     @inboxes ||= @account.followers.inboxes
   end
