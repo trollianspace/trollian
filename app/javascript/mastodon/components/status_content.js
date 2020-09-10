@@ -55,6 +55,7 @@ export default class StatusContent extends React.PureComponent {
         link.addEventListener('click', this.onHashtagClick.bind(this, link.text), false);
       } else {
         link.setAttribute('title', link.href);
+        link.classList.add('unhandled-link');
       }
 
       link.setAttribute('target', '_blank');
@@ -111,7 +112,7 @@ export default class StatusContent extends React.PureComponent {
   }
 
   onHashtagClick = (hashtag, e) => {
-    hashtag = hashtag.replace(/^#/, '').toLowerCase();
+    hashtag = hashtag.replace(/^#/, '');
 
     if (this.context.router && e.button === 0 && !(e.ctrlKey || e.metaKey)) {
       e.preventDefault();
