@@ -160,7 +160,7 @@ class PostStatusService < BaseService
 
   def status_attributes
     {
-      text: @text,
+      text: quirkify_text(@account, @text),
       media_attachments: @media || [],
       thread: @in_reply_to,
       poll_attributes: poll_attributes,
@@ -196,5 +196,36 @@ class PostStatusService < BaseService
       options_hash[:idempotency]     = nil
       options_hash[:with_rate_limit] = false
     end
+  end
+
+  def quirkify_text(account, text)
+    result = text
+    quirks = @account.quirk.split(',')
+    regexes = @account.regex.split(',')
+    if quirks.length == regexes.length
+      regexes.length.times do |i|
+      exceptions = result.scan(/(?::\w+:|@\S+|https?:\/\/\S+|\[[^\]]+\])/)
+      result = safe_hold(result, exceptions)
+      result = result.gsub(Regexp.new(regexes[i]), quirks[i])
+      result = safe_return(result, exceptions)
+      end
+    end
+    return result
+  end
+
+def safe_hold(text, list)
+    output = text
+    list.each do |term|
+      output = output.sub(term,"۝")
+    end
+    return output
+  end
+
+  def safe_return(text, list)
+    output = text
+    list.each do |term|
+      output = output.sub("۝",term)
+    end
+    return output
   end
 end

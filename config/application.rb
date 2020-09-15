@@ -58,6 +58,7 @@ module Mastodon
       :de,
       :el,
       :en,
+      :'en-MD',
       :eo,
       :es,
       :'es-AR',

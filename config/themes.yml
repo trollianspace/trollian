@@ -1,4 +1,4 @@
-default: styles/mastodon_colorides.scss
+default: styles/Homestuck.scss
 sediroloc: styles/sediroloc.scss
 mastodon: styles/application.scss
 contrast: styles/contrast.scss

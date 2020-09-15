@@ -15,6 +15,7 @@ module SettingsHelper
     de: 'Deutsch',
     el: 'Ελληνικά',
     en: 'English',
+    'en-MD': 'Mastodon Default',
     eo: 'Esperanto',
     'es-AR': 'Español (Argentina)',
     es: 'Español',

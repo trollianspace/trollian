@@ -1,3 +1,40 @@
+$bbcode1: $classic-highlight-color !default;
+$bbcode2: lighten($black, 15%) !default;
+
+.faicon_FTL {
+  display: none;
+}
+@font-face {
+  font-family: "Cute";
+  src: url('My_First_Crush.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: "Pappy";
+  src: url('PAPYRUS.TTF') format('truetype');
+}
+
+@font-face {
+  font-family: "TrollType";
+  src: url('trolltype.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: "YANDERE";
+  src: url('YANDERE.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: "comicpapyrus";
+  src: url('Comic_Parchment.ttf') format('truetype');
+}
+
+ @font-face {
+  font-family: "NewAlternian";
+  src: url('NewAlternian.ttf') format('truetype');
+}
+
+
 .bbcode__b {
     font-weight: 900;
 }
@@ -71,3 +108,90 @@ pre {
 .bbcode__size {
     size: attr(data-bbcodesize size);
 }
+
+.bbcode__colorhex {
+    color: attr(data-bbcodecolor colorhex);
+}
+
+.bbcode__quote {
+    padding: 10px 10px;
+    border-left: 5px solid $bbcode1;
+}
+
+.bbcode__code {
+    display: block;
+    padding: 9px;
+    line-height: 1.42857143;
+    color: $white;
+    /*
+    old code was 
+    word-break: break-all;
+    word-wrap: break-word;
+    */
+    word-break: normal;
+    word-wrap: normal;
+    background-color: $bbcode2;
+    border: 1px solid $bbcode2;
+    border-radius: 4px;
+    overflow-x: scroll;
+}
+
+.bbcode__caps {
+    text-transform: uppercase;
+}
+
+.bbcode__lower {
+    text-transform: lowercase;
+}
+
+.bbcode__kan {
+    text-transform: capitalize;
+  }
+
+.bbcode__comic {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+  }
+
+.bbcode__doc {
+    color: rgba(0, 0, 0, 0.0);
+  }
+
+.bbcode__hs {
+    font-family: "Courier New", Courier, monospace;
+  }
+
+.bbcode__cute2 {
+    font-family: "YANDERE";
+  }
+
+.bbcode__oa {
+    font-family: "TrollType";
+  }
+
+.bbcode__sc {
+    font-variant: small-caps;
+  }
+
+.bbcode__impact {
+    font-family: "Impact", Charcoal, sans-serif;
+  }
+
+.bbcode__luci {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+   }
+
+.bbcode__pap {
+    font-family: "Pappy";
+  }
+
+.bbcode__copap {
+    font-family: "comicpapyrus";
+  }
+
+.bbcode__na {
+    font-family: "NewAlternian";
+  }
+
+.bbcode__cute {
+    font-family: "Cute";
+  }

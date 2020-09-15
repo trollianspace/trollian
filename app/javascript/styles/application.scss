@@ -27,3 +27,8 @@
 @import 'mastodon/rtl';
 @import 'mastodon/accessibility';
 @import 'mastodon/bbcode';
+
+// Columns width
+div.column {
+  flex-grow: 1;
+}

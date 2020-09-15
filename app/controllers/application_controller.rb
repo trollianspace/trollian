@@ -26,9 +26,30 @@ class ApplicationController < ActionController::Base
   helper_method :current_bbcode_color
   helper_method :current_bbcode_pulse
   helper_method :current_bbcode_large
+  helper_method :current_bbcode_colorhex
+  helper_method :current_bbcode_quote
+  helper_method :current_bbcode_code
+  helper_method :current_bbcode_center
+  helper_method :current_bbcode_right
+  helper_method :current_bbcode_url
+  helper_method :current_bbcode_caps
+  helper_method :current_bbcode_lower
+  helper_method :current_bbcode_kan
+  helper_method :current_bbcode_comic
+  helper_method :current_bbcode_doc
+  helper_method :current_bbcode_strike
+  helper_method :current_bbcode_hs
+  helper_method :current_bbcode_cute2
+  helper_method :current_bbcode_oa
+  helper_method :current_bbcode_sc
+  helper_method :current_bbcode_impact
+  helper_method :current_bbcode_luci
+  helper_method :current_bbcode_pap
+  helper_method :current_bbcode_copap
+  helper_method :current_bbcode_na
+  helper_method :current_bbcode_cute
   helper_method :current_bbcode_i
   helper_method :current_bbcode_b
-  helper_method :current_bbcode_s
   helper_method :current_bbcode_u
   helper_method :single_user_mode?
   helper_method :use_seamless_external_login?
@@ -207,9 +228,97 @@ class ApplicationController < ActionController::Base
     return current_user&.setting_bbcode_u
   end
   
-  def current_bbcode_s
-    return current_user&.setting_bbcode_s
+  def current_bbcode_strike
+    return current_user&.setting_bbcode_strike
   end
+
+  def current_bbcode_colorhex
+    return current_user&.setting_bbcode_colorhex
+  end
+
+  def current_bbcode_quote
+    return current_user&.setting_bbcode_quote
+  end
+
+  def current_bbcode_code
+    return current_user&.setting_bbcode_code
+  end
+
+  def current_bbcode_center
+    return current_user&.setting_bbcode_center
+  end
+
+  def current_bbcode_right
+    return current_user&.setting_bbcode_right
+  end
+
+  def current_bbcode_url
+    return current_user&.setting_bbcode_url
+  end
+
+  def current_bbcode_caps
+    return current_user&.setting_bbcode_caps
+  end
+
+  def current_bbcode_lower
+    return current_user&.setting_bbcode_lower
+  end
+
+  def current_bbcode_kan
+    return current_user&.setting_bbcode_kan
+  end
+
+  def current_bbcode_comic
+    return current_user&.setting_bbcode_comic
+  end
+
+  def current_bbcode_doc
+    return current_user&.setting_bbcode_doc
+  end
+
+  def current_bbcode_hs
+    return current_user&.setting_bbcode_hs
+  end
+
+  def current_bbcode_cute2
+    return current_user&.setting_bbcode_cute2
+  end
+
+  def current_bbcode_oa
+    return current_user&.setting_bbcode_oa
+  end
+
+  def current_bbcode_sc
+    return current_user&.setting_bbcode_sc
+  end
+
+  def current_bbcode_impact
+    return current_user&.setting_bbcode_impact
+  end
+
+  def current_bbcode_luci
+    return current_user&.setting_bbcode_luci
+  end
+
+  def current_bbcode_pap
+    return current_user&.setting_bbcode_pap
+  end
+
+  def current_bbcode_copap
+    return current_user&.setting_bbcode_copap
+  end
+
+  def current_bbcode_na
+    return current_user&.setting_bbcode_na
+  end
+
+  def current_bbcode_cute
+    return current_user&.setting_bbcode_cute
+  end
+
+
+
+
 
   def respond_with_error(code)
     respond_to do |format|

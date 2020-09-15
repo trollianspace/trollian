@@ -358,7 +358,7 @@ class Formatter
   
   def format_bbcode(html)
     begin
-      allowed_bbcodes = [:i, :b, :color, :quote, :code, :size, :u, :s, :spin, :pulse, :flip, :large, :colorhex, :url]
+      allowed_bbcodes = [:i, :b, :color, :quote, :code, :size, :u, :strike, :spin, :pulse, :flip, :large, :colorhex, :quote, :code, :center, :right, :url, :caps, :lower, :kan, :comic, :doc, :hs, :cute2, :oa, :sc, :impact, :luci, :pap, :copap, :na, :cute]
       html = html.bbcode_to_html(false, {
         :spin => {
           :html_open => '<span class="bbcode__spin">', :html_close => '</span>',
@@ -376,6 +376,14 @@ class Formatter
           :html_open => '<span class="bbcode__i">', :html_close => '</span>',
           :description => 'Make text italic',
           :example => 'This is [i]italic[/i].'},
+        :u => {
+          :html_open => '<span class="bbcode__u">', :html_close => '</span>',
+          :description => 'Under line',
+          :example => 'This is [u]Under line[/u].'},
+        :strike => {
+          :html_open => '<span class="bbcode__s">', :html_close => '</span>',
+          :description => 'line through',
+          :example => 'This is [s]line through[/s].'},
         :flip => {
           :html_open => '<span class="bbcode__flip-%direction%">', :html_close => '</span>',
           :description => 'Flip text',
@@ -423,6 +431,82 @@ class Formatter
           :quick_param_format => /^((((http|https|ftp):\/\/)).+)$/,
           :param_tokens => [{:token => :url}],
           :quick_param_format_description => 'The URL should start with http:// https://, ftp://'},
+        :quote => {
+          :html_open => '<div class="bbcode__quote">', :html_close => '</div>',
+          :description => 'Quote',
+          :example => 'This is [quote]quote[/quote].'},
+        :code => {
+          :html_open => '<div class="bbcode__code">', :html_close => '</div>',
+          :description => 'Code',
+          :example => 'This is [code]Code[/code].'},
+        :center => {
+          :html_open => '<div style="text-align:center;">', :html_close => '</div>',
+          :description => 'Center a text',
+          :example => '[center]This is centered[/center].'},
+        :right => {
+          :html_open => '<div style="text-align:right;">', :html_close => '</div>',
+          :description => 'Right Align a text',
+          :example => '[right]This is centered[/right].'},
+        :caps => {
+          :html_open => '<span class="bbcode__caps">', :html_close => '</span>',
+          :description => 'Capitalize',
+          :example => 'This is [caps]capitalize[/caps].'},
+        :lower => {
+          :html_open => '<span class="bbcode__lower">', :html_close => '</span>',
+          :description => 'Lowercase',
+          :example => 'This is [lower]lowercase[/lower].'},
+        :kan => {
+          :html_open => '<span class="bbcode__kan">', :html_close => '</span>',
+          :description => 'uppercase',
+          :example => 'This is [kan]uppercase[/kan].'},
+        :comic => {
+          :html_open => '<span class="bbcode__comic">', :html_close => '</span>',
+          :description => 'comic sans',
+          :example => 'This is [comic]comic sans[/comic].'},
+        :doc => {
+          :html_open => '<span class="bbcode__doc">', :html_close => '</span>',
+          :description => 'transparent text',
+          :example => 'This is [doc]transparent text[/doc].'},
+        :hs => {
+          :html_open => '<span class="bbcode__hs">', :html_close => '</span>',
+          :description => 'Courier New',
+          :example => 'This is [hs]Courier New[/hs].'},
+        :cute2 => {
+          :html_open => '<span class="bbcode__cute2">', :html_close => '</span>',
+          :description => 'CUTE',
+          :example => 'This is [cute2]CUTE[/cute2].'},
+        :oa => {
+          :html_open => '<span class="bbcode__oa">', :html_close => '</span>',
+          :description => 'Old Alternian',
+          :example => 'This is [oa]Old Alternian[/oa].'},
+        :sc => {
+          :html_open => '<span class="bbcode__sc">', :html_close => '</span>',
+          :description => 'Small Caps',
+          :example => 'This is [sc]Small Caps[/sc].'},
+        :impact => {
+          :html_open => '<span class="bbcode__impact">', :html_close => '</span>',
+          :description => 'Impact',
+          :example => 'This is [impact]Impact[/impact].'},
+        :luci => {
+          :html_open => '<span class="bbcode__luci">', :html_close => '</span>',
+          :description => 'Lucida Sans',
+          :example => 'This is [luci]Lucida Sans[/luci].'},
+        :pap => {
+          :html_open => '<span class="bbcode__pap">', :html_close => '</span>',
+          :description => 'Papyrus',
+          :example => 'This is [pap]Papyrus[/pap].'},
+        :copap => {
+          :html_open => '<span class="bbcode__copap">', :html_close => '</span>',
+          :description => 'Comic Papyrus',
+          :example => 'This is [copap]Comic Papyrus[/copap].'},
+        :na => {
+          :html_open => '<span class="bbcode__na">', :html_close => '</span>',
+          :description => 'New Alternian',
+          :example => 'This is [na]New Alternian[/na].'},
+        :cute => {
+          :html_open => '<span class="bbcode__cute">', :html_close => '</span>',
+          :description => 'Cute',
+          :example => 'This is [cute]Cute[/cute].'},        
       }, :enable, *allowed_bbcodes)
     rescue Exception => e
     end

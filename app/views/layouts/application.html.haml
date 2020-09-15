@@ -137,11 +137,159 @@
             text-decoration: none !important;
           }
         
-    - unless current_bbcode_s
+    - unless current_bbcode_strike
       %style{nonce: request.content_security_policy_nonce}
         :plain
           .status__content > div:first-child span {
             text-decoration: none !important;
+          }
+
+    - unless current_bbcode_colorhex
+      %style{nonce: request.content_security_policy_nonce}
+        :plain
+          .status__content > div:first-child span {
+            color: inherit !important;
+          }
+
+    - unless current_bbcode_quote
+      %style{nonce: request.content_security_policy_nonce}
+        :plain
+          padding: 10px 10px;
+            border-left: 5px solid $bbcode1;
+          }
+
+    - unless current_bbcode_code
+      %style{nonce: request.content_security_policy_nonce}
+        :plain
+          display: block;
+          padding: 9px;
+          line-height: 1.42857143;
+          color: $white;
+          word-break: normal;
+          word-wrap: normal;
+          background-color: $bbcode2;
+          border: 1px solid $bbcode2;
+          border-radius: 4px;
+          overflow-x: scroll;
+          }
+
+    - unless current_bbcode_center
+      %style{nonce: request.content_security_policy_nonce}
+        :plain
+          .status__content > div:first-child span {
+            text-align: center;
+          }
+
+    - unless current_bbcode_right
+      %style{nonce: request.content_security_policy_nonce}
+        :plain
+          .status__content > div:first-child span {
+            text-align: right;
+          }
+
+    - unless current_bbcode_caps
+      %style{nonce: request.content_security_policy_nonce}
+        :plain
+          .bbcode__caps {
+            text-transform: uppercase;
+          }
+
+    - unless current_bbcode_kan
+      %style{nonce: request.content_security_policy_nonce}
+        :plain
+          .bbcode__kan {
+            text-transform: capitalize;
+          }
+
+    - unless current_bbcode_lower
+      %style{nonce: request.content_security_policy_nonce}
+        :plain
+          .bbcode__lower {
+            text-transform: lowercase;
+          }
+
+    - unless current_bbcode_comic
+      %style{nonce: request.content_security_policy_nonce}
+        :plain
+          .bbcode__comic {
+            font-family: "Comic Sans MS", cursive, sans-serif;
+          }
+
+    - unless current_bbcode_doc
+      %style{nonce: request.content_security_policy_nonce}
+        :plain
+          .bbcode__comic {
+            color: rgba(0, 0, 0, 0.0);
+          }
+
+    - unless current_bbcode_hs
+      %style{nonce: request.content_security_policy_nonce}
+        :plain
+          .bbcode__hs {
+            font-family: "Courier New", Courier, monospace;
+          }
+
+    - unless current_bbcode_cute2
+      %style{nonce: request.content_security_policy_nonce}
+        :plain
+          .bbcode__cute2 {
+            font-family: "YANDERE";
+          }
+
+    - unless current_bbcode_oa
+      %style{nonce: request.content_security_policy_nonce}
+        :plain
+          .bbcode__oa {
+            font-family: "Trolltype";
+          }
+
+    - unless current_bbcode_sc
+      %style{nonce: request.content_security_policy_nonce}
+        :plain
+          .bbcode__sc {
+            font-variant" small-caps;
+          }
+
+    - unless current_bbcode_impact
+      %style{nonce: request.content_security_policy_nonce}
+        :plain
+          .bbcode__impact {
+            font-family: "Impact", Charcoal, snas-serif;
+          }
+
+    - unless current_bbcode_luci
+      %style{nonce: request.content_security_policy_nonce}
+        :plain
+          .bbcode__luci {
+            font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+          }
+
+    - unless current_bbcode_pap
+      %style{nonce: request.content_security_policy_nonce}
+        :plain
+          .bbcode__pap {
+            font-family: "Pappy";
+          }
+
+    - unless current_bbcode_copap
+      %style{nonce: request.content_security_policy_nonce}
+        :plain
+          .bbcode__copap {
+            font-family: "comicpapyrus";
+          }
+
+    - unless current_bbcode_na
+      %style{nonce: request.content_security_policy_nonce}
+        :plain
+          .bbcode__na {
+            font-family: "NewAlternian";
+          }
+
+    - unless current_bbcode_cute
+      %style{nonce: request.content_security_policy_nonce}
+        :plain
+          .bbcode__cute {
+            font-family: "Cute";
           }
 
     = yield :header_tags

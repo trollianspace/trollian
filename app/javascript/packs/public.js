@@ -19,6 +19,11 @@ window.addEventListener('message', e => {
       id: data.id,
       height: document.getElementsByTagName('html')[0].scrollHeight,
     }, '*');
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(sizeBioText);
+    } else {
+      sizeBioText();
+    }
   });
 });
 
@@ -138,6 +143,17 @@ function main() {
       const message = (statusEl.dataset.spoiler === 'expanded') ? (messages['status.show_less'] || 'Show less') : (messages['status.show_more'] || 'Show more');
       spoilerLink.textContent = (new IntlMessageFormat(message, locale)).format();
     });
+
+    [].forEach.call(document.querySelectorAll('[data-component="Card"]'), (content) => {
+      const props = JSON.parse(content.getAttribute('data-props'));
+      ReactDOM.render(<CardContainer locale={locale} {...props} />, content);
+    });
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(sizeBioText);
+    } else {
+      sizeBioText();
+    }
   });
 
   delegate(document, '.webapp-btn', 'click', ({ target, button }) => {
@@ -255,6 +271,53 @@ function main() {
       target.style.display = 'none';
     } else {
       target.style.display = 'block';
+    }
+  });
+
+  delegate(document, '#account_note', 'input', sizeBioText);
+
+  function sizeBioText() {
+    const noteCounter = document.querySelector('.note-counter');
+    const bioTextArea = document.querySelector('#account_note');
+
+    if (noteCounter) {
+      noteCounter.textContent = 2000 - length(bioTextArea.value);
+    }
+
+    if (bioTextArea) {
+      bioTextArea.style.height = 'auto';
+      bioTextArea.style.height = (bioTextArea.scrollHeight+3) + 'px';
+    }
+  }
+
+  const MAX_QUIRK_LENGTH = 200; // ???
+
+  delegate(document, '#account_quirk', 'input', ({ target }) => {
+    const quirkCounter = document.querySelector('.quirk-counter');
+                                                            // Not sure about this selector...
+                                                            // just copying the display name one above...
+    const quirk         = document.querySelector('.card .quirk strong');
+
+    if (quirkCounter) {
+      quirkCounter.textContent = MAX_QUIRK_LENGTH - length(target.value);
+    }
+
+    if (quirk) {
+      quirk.innerHTML = target.value; // probably shouldn't need to emojify this, right?
+    }
+  });
+
+  const MAX_REGEX_LENGTH = 200; // ???
+   delegate(document, '#account_regex', 'input', ({ target }) => {
+    const regexCounter = document.querySelector('.regex-counter');
+    // Not sure about this selector...
+    // just copying the display name one above...
+    const regex         = document.querySelector('.card .regex strong');
+     if (regexCounter) {
+      regexCounter.textContent = MAX_REGEX_LENGTH - length(target.value);
+    }
+     if (regex) {
+      regex.innerHTML = target.value; // probably shouldn't need to emojify this, right?
     }
   });
 }

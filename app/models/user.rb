@@ -110,7 +110,10 @@ class User < ApplicationRecord
   has_many :session_activations, dependent: :destroy
 
   delegate :auto_play_gif, :default_sensitive, :unfollow_modal, :boost_modal, :delete_modal, :emoji_size_simple, :emoji_size_detailed, :emoji_size_name, :column_size,
-           :bbcode_spin, :bbcode_pulse, :bbcode_b, :bbcode_i, :bbcode_color, :bbcode_s, :bbcode_large, :bbcode_size, :bbcode_u, :bbcode_flip, :show_cw_box,
+           :bbcode_spin, :bbcode_pulse, :bbcode_b, :bbcode_i, :bbcode_color, :bbcode_strike, :bbcode_large, :bbcode_size, :bbcode_u, :bbcode_flip, 
+           :bbcode_colorhex, :bbcode_quote, :bbcode_code, :bbcode_center, :bbcode_right, :bbcode_url, :bbcode_caps, :bbcode_lower, :bbcode_kan, 
+           :bbcode_comic, :bbcode_doc, :bbcode_hs, :bbcode_cute2, :bbcode_oa, :bbcode_sc, :bbcode_impact, :bbcode_luci, :bbcode_pap, :bbcode_copap, 
+           :bbcode_na, :bbcode_cute, :show_cw_box,
            :reduce_motion, :system_font_ui, :noindex, :theme, :display_media, :hide_network,
            :expand_spoilers, :default_language, :aggregate_reblogs, :show_application,
            :advanced_layout, :use_blurhash, :use_pending_items, :trends, :crop_images,

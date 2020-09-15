@@ -51,7 +51,28 @@ class UserSettingsDecorator
     user.settings['bbcode_b']            = bbcode_b_preference if change?('setting_bbcode_b')
     user.settings['bbcode_i']            = bbcode_i_preference if change?('setting_bbcode_i')
     user.settings['bbcode_u']            = bbcode_u_preference if change?('setting_bbcode_u')
-    user.settings['bbcode_s']            = bbcode_s_preference if change?('setting_bbcode_s')
+    user.settings['bbcode_strike']       = bbcode_strike_preference if change?('setting_bbcode_strike')
+    user.settings['bbcode_colorhex']     = bbcode_colorhex_preference if change?('setting_bbcode_colorhex')
+    user.settings['bbcode_quote']        = bbcode_quote_preference if change?('setting_bbcode_quote')
+    user.settings['bbcode_code']         = bbcode_code_preference if change?('setting_bbcode_code')
+    user.settings['bbcode_center']       = bbcode_center_preference if change?('setting_bbcode_center')
+    user.settings['bbcode_right']        = bbcode_right_preference if change?('setting_bbcode_right')
+    user.settings['bbcode_url']          = bbcode_url_preference if change?('setting_bbcode_url')
+    user.settings['bbcode_caps']         = bbcode_caps_preference if change?('setting_bbcode_caps')
+    user.settings['bbcode_lower']        = bbcode_lower_preference if change?('setting_bbcode_lower')
+    user.settings['bbcode_kan']          = bbcode_kan_preference if change?('setting_bbcode_kan')
+    user.settings['bbcode_comic']        = bbcode_comic_preference if change?('setting_bbcode_comic')
+    user.settings['bbcode_doc']          = bbcode_doc_preference if change?('setting_bbcode_doc')
+    user.settings['bbcode_hs']           = bbcode_hs_preference if change?('setting_bbcode_hs')
+    user.settings['bbcode_cute2']        = bbcode_cute2_preference if change?('setting_bbcode_cute2')
+    user.settings['bbcode_oa']           = bbcode_oa_preference if change?('setting_bbcode_oa')
+    user.settings['bbcode_sc']           = bbcode_sc_preference if change?('setting_bbcode_sc')
+    user.settings['bbcode_impact']       = bbcode_impact_preference if change?('setting_bbcode_impact')
+    user.settings['bbcode_luci']         = bbcode_luci_preference if change?('setting_bbcode_luci')
+    user.settings['bbcode_pap']          = bbcode_pap_preference if change?('setting_bbcode_pap')
+    user.settings['bbcode_copap']        = bbcode_copap_preference if change?('setting_bbcode_copap')
+    user.settings['bbcode_na']           = bbcode_na_preference if change?('setting_bbcode_na')
+    user.settings['bbcode_cute']         = bbcode_cute_preference if change?('setting_bbcode_cute')
     user.settings['show_cw_box']         = show_cw_box_preference if change?('setting_show_cw_box')
   end
 
@@ -199,8 +220,92 @@ class UserSettingsDecorator
     boolean_cast_setting 'setting_bbcode_u'
   end
   
-  def bbcode_s_preference
-    boolean_cast_setting 'setting_bbcode_s'
+  def bbcode_strike_preference
+    boolean_cast_setting 'setting_bbcode_strike'
+  end
+
+  def bbcode_colorhex_preference
+    boolean_cast_setting 'setting_bbcode_colorhex'
+  end
+
+  def bbcode_quote_preference
+    boolean_cast_setting 'setting_bbcode_quote'
+  end
+
+  def bbcode_code_preference
+    boolean_cast_setting 'setting_bbcode_code'
+  end
+
+  def bbcode_center_preference
+    boolean_cast_setting 'setting_bbcode_center'
+  end
+
+  def bbcode_right_preference
+    boolean_cast_setting 'setting_bbcode_right'
+  end
+
+  def bbcode_url_preference
+    boolean_cast_setting 'setting_bbcode_url'
+  end
+
+  def bbcode_caps_preference
+    boolean_cast_setting 'setting_bbcode_caps'
+  end
+
+  def bbcode_lower_preference
+    boolean_cast_setting 'setting_bbcode_lower'
+  end
+
+  def bbcode_kan_preference
+    boolean_cast_setting 'setting_bbcode_kan'
+  end
+
+  def bbcode_comic_preference
+    boolean_cast_setting 'setting_bbcode_comic'
+  end
+
+  def bbcode_doc_preference
+    boolean_cast_setting 'setting_bbcode_doc'
+  end
+
+  def bbcode_hs_preference
+    boolean_cast_setting 'setting_bbcode_hs'
+  end
+
+  def bbcode_cute2_preference
+    boolean_cast_setting 'setting_bbcode_cute2'
+  end
+
+  def bbcode_oa_preference
+    boolean_cast_setting 'setting_bbcode_oa'
+  end
+
+  def bbcode_sc_preference
+    boolean_cast_setting 'setting_bbcode_sc'
+  end
+
+  def bbcode_impact_preference
+    boolean_cast_setting 'setting_bbcode_impact'
+  end
+
+  def bbcode_luci_preference
+    boolean_cast_setting 'setting_bbcode_luci'
+  end
+
+  def bbcode_pap_preference
+    boolean_cast_setting 'setting_bbcode_pap'
+  end
+
+  def bbcode_copap_preference
+    boolean_cast_setting 'setting_bbcode_copap'
+  end
+
+  def bbcode_na_preference
+    boolean_cast_setting 'setting_bbcode_na'
+  end
+
+  def bbcode_cute_preference
+    boolean_cast_setting 'setting_bbcode_cute'
   end
 
   def show_cw_box_preference

@@ -50,6 +50,8 @@
 #  avatar_storage_schema_version :integer
 #  header_storage_schema_version :integer
 #  devices_url                   :string
+#  quirk                         :text
+#  regex                         :text
 #
 
 class Account < ApplicationRecord
@@ -83,8 +85,9 @@ class Account < ApplicationRecord
   # Local user validations
   validates :username, format: { with: /\A[a-z0-9_]+\z/i }, length: { maximum: 30 }, if: -> { local? && will_save_change_to_username? && actor_type != 'Application' }
   validates_with UnreservedUsernameValidator, if: -> { local? && will_save_change_to_username? }
-  validates :display_name, length: { maximum: 40 }, if: -> { local? && will_save_change_to_display_name? }
-  validates :note, note_length: { maximum: 800 }, if: -> { local? && will_save_change_to_note? }
+  validates :display_name, length: { maximum: 60 }, if: -> { local? && will_save_change_to_display_name? }
+  validates :note, note_length: { maximum: 2000 }, if: -> { local? && will_save_change_to_note? }
+  validate :note_has_twenty_newlines?, if: -> { local? && will_save_change_to_note? }
   validates :fields, length: { maximum: 6 }, if: -> { local? && will_save_change_to_fields? }
 
   scope :remote, -> { where.not(domain: nil) }
@@ -322,8 +325,8 @@ class Account < ApplicationRecord
   def save_with_optional_media!
     save!
   rescue ActiveRecord::RecordInvalid
-    self.avatar = nil
-    self.header = nil
+    self.avatar = nil if errors[:avatar].present?
+    self.header = nil if errors[:header].present?
 
     save!
   end
@@ -354,6 +357,10 @@ class Account < ApplicationRecord
 
   def preferred_inbox_url
     shared_inbox_url.presence || inbox_url
+  end
+
+  def note_has_twenty_newlines?
+    errors.add(:note, 'Bio can\'t have more then 20 newlines') unless note.count("\n") <= 20
   end
 
   class Field < ActiveModelSerializers::Model
